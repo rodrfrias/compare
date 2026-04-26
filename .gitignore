@@ -1,0 +1,15 @@
+# --- BACKEND (Django) ---
+backend_compare/venv/
+backend_compare/db.sqlite3
+backend_compare/__pycache__/
+backend_compare/.env
+backend_compare/staticfiles/
+
+# --- FRONTEND (Node/Vite) ---
+frontend_compare/node_modules/
+frontend_compare/dist/
+frontend_compare/.env.local
+
+# --- GENERAL ---
+.DS_Store
+.vscode/
