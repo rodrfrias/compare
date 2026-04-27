@@ -151,7 +151,7 @@ def enviar_pdf_a_gemini(pdf_bytes, file_name):
                 "data": pdf_base64  # <--- Ahora le enviamos el "texto" de la foto
             }
         ])
-        
+
         return json.loads(response.text)
     except Exception as e:
         logger.error(f"Error en API Gemini: {e}")

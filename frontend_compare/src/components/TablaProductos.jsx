@@ -41,14 +41,14 @@ const TablaProductos = () => {
             <thead>
               <tr className="border-b border-gray-800 bg-gray-50 sticky top-0 z-20">
                 <th className="px-2 py-3 text-center w-8"><input type="checkbox" onChange={toggleTodos} checked={seleccionados.length === listaProductos.length} className="accent-black" /></th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">categoria</th>
+                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">codigo</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">nombre</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">marca</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">modelo</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">presentacion</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">proveedor</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right whitespace-nowrap">precio neto p/u</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">iva %</th>
+                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">iva</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-righ whitespace-nowrap">precio final</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right whitespace-nowrap">ahorro por unidad</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">cantidad</th>
@@ -69,9 +69,9 @@ const TablaProductos = () => {
                         className="accent-black" 
                       />
                     </td>
-                    <td className="px-2 py-3 text-[11px] text-gray-700">{prod.categoria}</td>
+                    <td className="px-2 py-3 text-[11px] text-gray-700 whitespace-nowrap">{prod.codigo}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700 font-bold whitespace-nowrap">{prod.nombre}</td>
-                    <td className="px-2 py-3 text-[11px] text-gray-700">{prod.marca}</td>
+                    <td className="px-2 py-3 text-[11px] text-gray-700 whitespace-nowrap">{prod.marca}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700">{prod.modelo}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700">{prod.presentacion}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700">{prod.proveedor}</td>

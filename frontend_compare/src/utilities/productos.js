@@ -1,6 +1,7 @@
 const productosRaw = [
   {
     id: 1,
+    codigo: "SKF-VKMA01148",
     categoria: "MOTOR",
     nombre: "KIT DE DISTRIBUCION",
     marca: "SKF",
@@ -13,6 +14,7 @@ const productosRaw = [
   },
   {
     id: 2,
+    codigo: "FRA-PD637",
     categoria: "FRENOS",
     nombre: "PASTILLAS DE FRENO DELANTERAS",
     marca: "FRAS-LE",
@@ -25,6 +27,7 @@ const productosRaw = [
   },
   {
     id: 3,
+    codigo: "MON-742031SP",
     categoria: "SUSPENSION",
     nombre: "AMORTIGUADOR DELANTERO",
     marca: "MONROE",
@@ -37,6 +40,7 @@ const productosRaw = [
   },
   {
     id: 4,
+    codigo: "TYC-20-12345-05-2",
     categoria: "ILUMINACION",
     nombre: "OPTICA DELANTERA DERECHA",
     marca: "TYC",
@@ -49,6 +53,7 @@ const productosRaw = [
   },
   {
     id: 5,
+    codigo: "DOL-A215",
     categoria: "MOTOR",
     nombre: "BOMBA DE AGUA",
     marca: "DOLZ",
@@ -61,6 +66,7 @@ const productosRaw = [
   },
   {
     id: 6,
+    codigo: "MAN-W71294",
     categoria: "FILTRACION",
     nombre: "FILTRO DE ACEITE",
     marca: "MANN-FILTER",
@@ -73,6 +79,7 @@ const productosRaw = [
   },
   {
     id: 7,
+    codigo: "WEG-FAP4054",
     categoria: "FILTRACION",
     nombre: "FILTRO DE AIRE",
     marca: "WEGA",
