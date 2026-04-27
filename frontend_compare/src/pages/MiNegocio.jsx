@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const MiNegocio = () => {
-  const [tab, setTab] = useState('datos')
+  const [tab, setTab] = useState('preview')
 
   const inputClass =
     'w-full border border-black/10 rounded-sm bg-white px-3 py-2.5 text-[13px] text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-black/30 transition-colors'
@@ -12,9 +12,9 @@ const MiNegocio = () => {
   const requiredDot = <span className="text-blue-500 ml-0.5">*</span>
 
   const rows = [
-    { nombre: 'PRODUCTO A', marca: 'X', modelo: 'X', presentacion: 'X',precio: '$ X,XX', cantidad: "X" },
-    { nombre: 'PRODUCTO B', marca: 'X', modelo: 'X', presentacion: 'X',precio: '$ X,XX', cantidad: "X" },
-    { nombre: 'PRODUCTO C', marca: 'X', modelo: 'X', presentacion: 'X',precio: '$ X,XX', cantidad: "X" },
+    { codigo: "001", nombre: 'PRODUCTO A', marca: 'X', modelo: 'X', precio: '$ X,XX', cantidad: "X" },
+    { codigo: "002", nombre: 'PRODUCTO B', marca: 'X', modelo: 'X', precio: '$ X,XX', cantidad: "X" },
+    { codigo: "003", nombre: 'PRODUCTO C', marca: 'X', modelo: 'X', precio: '$ X,XX', cantidad: "X" },
   ]
 
   return (
@@ -156,157 +156,116 @@ const MiNegocio = () => {
 
       {/* ── Tab: Preview PDF ── */}
       {tab === 'preview' && (
-        <div className="flex-1 overflow-y-auto p-6 flex flex-col items-center gap-5">
+        <div className="flex-1 overflow-y-auto p-8 flex flex-col items-center gap-6">
+          
+          <div className="w-[794px] min-h-[1123px] bg-white border border-black p-12 flex flex-col gap-8 mb-10">
 
-          <p className="text-[11px] font-mono text-gray-400 text-center max-w-md pt-1">
-            Así se verá tu orden de compra. Todos los datos se completan automáticamente con la información de tu perfil.
-          </p>
-
-          {/* Hoja A4 simulada */}
-          <div className="w-full max-w-2xl bg-white border border-gray-900 shadow-lg p-10 flex flex-col gap-6 mb-6">
-
-            {/* Encabezado de la empresa compradora */}
-            <div className="flex items-start justify-between border-b-2 border-gray-900 pb-5">
+            {/* Encabezado */}
+            <div className="flex items-start justify-between border-b-2 border-gray-900 pb-6">
               <div className="flex-1">
-                <p className="text-base font-mono font-bold text-gray-900 uppercase tracking-wide mb-2">
+                <p className="text-lg font-mono font-bold text-gray-900 uppercase tracking-wide mb-2">
                   Distribuidora Central S.R.L.
                 </p>
-                <p className="text-[11.5px] font-mono text-gray-700 leading-relaxed">
-                  CUIT: 30-71234567-8
-                </p>
-                <p className="text-[11.5px] font-mono text-gray-700 leading-relaxed">
-                  Condición IVA: Responsable Inscripto
-                </p>
-                <p className="text-[11.5px] font-mono text-gray-700 leading-relaxed">
-                  Av. Corrientes 1234, Piso 5, Of. 12
-                </p>
-                <p className="text-[11.5px] font-mono text-gray-700 leading-relaxed">
-                  CABA (C1043) · Buenos Aires
-                </p>
-                <p className="text-[11.5px] font-mono text-gray-700 leading-relaxed mt-1.5">
-                  Tel: 11 4567-8900 · lmartinez@empresaejemplo.com.ar
-                </p>
+                <div className="text-[12.5px] font-mono text-gray-700 space-y-1">
+                  <p>CUIT: 30-71234567-8</p>
+                  <p>Condición IVA: Responsable Inscripto</p>
+                  <p>Av. Corrientes 1234, Piso 5, Of. 12</p>
+                  <p>CABA (C1043) · Buenos Aires</p>
+                  <p className="pt-1">Tel: 11 4567-8900 · lmartinez@empresaejemplo.com.ar</p>
+                </div>
               </div>
               <div className="text-right ml-8">
-                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-gray-900 font-bold mb-3">
+                <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-gray-900 font-bold mb-3">
                   Orden de compra
                 </p>
-                <p className="text-[11.5px] font-mono text-gray-700">
+                <p className="text-[12.5px] font-mono text-gray-700">
                   N° <span className="font-bold text-gray-900">OC-2026-00127</span>
                 </p>
-                <p className="text-[11.5px] font-mono text-gray-700">
+                <p className="text-[12.5px] font-mono text-gray-700">
                   Fecha: <span className="font-bold text-gray-900">24/04/2026</span>
                 </p>
               </div>
             </div>
 
-            {/* Información del proveedor */}
-            <div className="border border-gray-900 rounded-sm px-5 py-4 bg-gray-50/50">
-              <p className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-2">
+            {/* Proveedor */}
+            <div className="border border-gray-900 rounded-sm px-6 py-5 bg-gray-50/50">
+              <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-2">
                 Proveedor destinatario
               </p>
-              <p className="text-[13.5px] font-mono font-bold text-gray-900 mb-1">
+              <p className="text-[14.5px] font-mono font-bold text-gray-900 mb-1">
                 Papelera del Plata S.A.
               </p>
-              <p className="text-[11.5px] font-mono text-gray-700">
-                CUIT: 30-65432198-7 · Responsable Inscripto
-              </p>
-              <p className="text-[11.5px] font-mono text-gray-700">
-                ventas@papeleradelplata.com.ar · 11 5234-9000
-              </p>
-              <p className="text-[11.5px] font-mono text-gray-700">
-                Av. Juan B. Justo 3456 · CABA (C1425)
-              </p>
-            </div>
-
-            {/* Tabla de productos */}
-            <div className="border border-gray-900 rounded-sm overflow-hidden">
-              {/* Header de tabla */}
-              <div className="grid grid-cols-12 bg-gray-900 px-5 py-2.5">
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white font-semibold">
-                  Nombre
-                </p>
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white text-center font-semibold">
-                  Marca
-                </p>
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white text-center font-semibold">
-                  Modelo
-                </p>
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white text-center font-semibold">
-                  Presentación
-                </p>
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white text-center font-semibold">
-                  Precio
-                </p>
-                <p className="col-span-2 text-[9px] font-mono uppercase tracking-[0.1em] text-white text-right font-semibold">
-                  Cantidad
-                </p>
+              <div className="text-[12.5px] font-mono text-gray-700 space-y-0.5">
+                <p>CUIT: 30-65432198-7 · Responsable Inscripto</p>
+                <p>ventas@papeleradelplata.com.ar · 11 5234-9000</p>
+                <p>Av. Juan B. Justo 3456 · CABA (C1425)</p>
               </div>
-              {/* Filas de productos */}
-              {rows.map((row, i) => (
-                <div
-                  key={i}
-                  className={`grid grid-cols-12 px-5 py-3 items-center ${
-                    i < rows.length - 1 ? 'border-b border-gray-200' : ''
-                  }`}
-                >
-                  <p className="col-span-2 text-[11px] font-mono text-gray-900 truncate">
-                    {row.nombre}
-                  </p>
-                  <p className="col-span-2 text-[11px] font-mono text-gray-600 text-center truncate px-1">
-                    {row.marca}
-                  </p>
-                  <p className="col-span-2 text-[11px] font-mono text-gray-600 text-center truncate px-1">
-                    {row.modelo}
-                  </p>
-                  <p className="col-span-2 text-[11px] font-mono text-gray-600 text-center truncate px-1">
-                    {row.presentacion}
-                  </p>
-                  <p className="col-span-2 text-[11px] font-mono text-gray-900 text-center truncate">
-                    {row.precio}
-                  </p>
-                  <p className="col-span-2 text-[11px] font-mono text-gray-900 text-right">
-                    {row.cantidad}
-                  </p>
-                </div>
-              ))}
-          
             </div>
 
-            {/* Condiciones y observaciones */}
-            <div className="border-t border-gray-300 pt-5 space-y-3">
+            {/* ── Tabla de productos (7 Columnas de igual ancho y bordes completos) ── */}
+            <div className="w-full mt-4 border-x border-t border-gray-900"> 
+              
+              {/* Encabezado con grid-cols-7 */}
+              <div className="grid grid-cols-7 bg-[#f8fafc] px-5 py-2 border-b border-gray-900">
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold">Código</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold">Producto</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Marca</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Modelo</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Present.</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-right">Precio</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-right">Cant</p>
+              </div>
+
+              {/* Filas */}
+              <div className="border-b border-gray-900">
+                {rows.map((row, i) => (
+                  <div
+                    key={i}
+                    className={`grid grid-cols-7 px-5 py-2 items-center ${
+                      i < rows.length - 1 ? 'border-b border-gray-100' : ''
+                    }`}
+                  >
+                    <p className="text-[11px] font-mono text-gray-400">{row.codigo}</p>
+                    <p className="text-[12px] font-mono text-gray-900 font-medium uppercase truncate">{row.nombre}</p>
+                    <p className="text-[11px] font-mono text-gray-600 text-center">{row.marca}</p>
+                    <p className="text-[11px] font-mono text-gray-600 text-center">{row.modelo}</p>
+                    <p className="text-[11px] font-mono text-gray-600 text-center">Unidad</p>
+                    <p className="text-[12px] font-mono text-gray-900 text-right">{row.precio}</p>
+                    <p className="text-[12px] font-mono text-gray-900 text-right font-medium">{row.cantidad}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Condiciones */}
+            <div className="mt-auto border-t border-gray-300 pt-6 space-y-4">
               <div>
-                <p className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">
-                  metodo de pago
-                </p>
-                <p className="text-[11px] font-mono text-gray-700">
-                  Transferencia
-                </p>
+                <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">Metodo de pago</p>
+                <p className="text-[12px] font-mono text-gray-700">Transferencia Bancaria</p>
               </div>
               <div>
-                <p className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">
-                  Lugar de entrega
-                </p>
-                <p className="text-[11px] font-mono text-gray-700">
-                  Av. Corrientes 1234, Piso 5, Of. 12 · CABA (C1043)
-                </p>
+                <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">Lugar de entrega</p>
+                <p className="text-[12px] font-mono text-gray-700">Av. Corrientes 1234, Piso 5, Of. 12 · CABA (C1043)</p>
               </div>
             </div>
 
-            {/* Pie de documento */}
-            <div className="border-t-2 border-gray-200 pt-4 mt-2">
-              <p className="text-[10px] font-mono text-gray-500">
-                Solicitante: <span className="text-gray-900 font-semibold">Laura Martínez</span> · lmartinez@empresaejemplo.com.ar
-              </p>
-              <p className="text-[9.5px] font-mono text-gray-400 mt-2">
-                Documento generado automáticamente por Compare · Esta orden de compra no constituye factura ni comprobante fiscal
+            {/* Pie de página con Indicador de Página */}
+            <div className="border-t-2 border-gray-200 pt-6 flex justify-between items-end">
+              <div className="max-w-[80%]">
+                <p className="text-[11px] font-mono text-gray-500">
+                  Solicitante: <span className="text-gray-900 font-semibold">Laura Martínez</span> · lmartinez@empresaejemplo.com.ar
+                </p>
+                <p className="text-[10.5px] font-mono text-gray-400 mt-2 leading-relaxed">
+                  Documento generado automáticamente por Compare. Esta orden de compra no constituye factura ni comprobante fiscal válido según normas de AFIP.
+                </p>
+              </div>
+              <p className="text-[11px] font-mono font-bold text-gray-900 uppercase tracking-widest">
+                Pagina 1
               </p>
             </div>
-
           </div>
         </div>
       )}
-
     </div>
   )
 }

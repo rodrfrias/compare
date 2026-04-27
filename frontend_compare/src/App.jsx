@@ -5,8 +5,8 @@ import NuevoPedido from "./pages/NuevoPedido";
 import MisCompras from "./pages/MisCompras";
 import MiNegocio from "./pages/MiNegocio";
 import PlanPago from "./pages/PlanPago";
-import Extractor from "./components/Extractor";
-import Json from "./components/Json";
+import Extractor from "./components/Pruebas/Extractor";
+import Json from "./components/Pruebas/Json";
 
 function App() {
 

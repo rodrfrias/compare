@@ -1,5 +1,5 @@
 import React from 'react'
-import Plan from '../components/Plan'
+import Plan from '../components/PlanDePago/Plan'
 
 const PlanPago = () => {
   return (
