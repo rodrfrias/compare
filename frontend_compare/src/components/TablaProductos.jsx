@@ -24,7 +24,7 @@ const TablaProductos = () => {
   const calcularSubtotal = (p) => (cantidades[p.id] || 0) * calcularPrecioFinal(p);
   const formatearPrecio = (v) => v.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  // Lógica de Cálculos de Totales
+  // Lógica de Cálculos de Totales 
   const subtotalGeneral = listaProductos
     .filter(p => seleccionados.includes(p.id))
     .reduce((acc, p) => acc + calcularSubtotal(p), 0);
@@ -115,7 +115,7 @@ const TablaProductos = () => {
       <div className="flex flex-row justify-end mt-2 mx-4 mb-2 gap-3 font-mono">
 
         {/* Tarjeta Ahorro */}
-        <div className="bg-white rounded-lg shadow-sm px-5 py-1.5 flex-1 max-w-85">
+        <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-85 border border-black/10">
           <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">
             ahorro total
           </p>
@@ -131,7 +131,7 @@ const TablaProductos = () => {
         </div>
 
         {/* Tarjeta Total */}
-        <div className="bg-white rounded-lg shadow-sm px-5 py-1.5 flex-1 max-w-[340px]">
+        <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-[340px] border border-black/10">
           <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">
             total
           </p>
