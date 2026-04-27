@@ -6,6 +6,7 @@ import MisCompras from "./pages/MisCompras";
 import MiNegocio from "./pages/MiNegocio";
 import PlanPago from "./pages/PlanPago";
 import Extractor from "./components/Extractor";
+import Json from "./components/Json";
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="app/planPago" element={<PlanPago/>}/>
-        <Route path="app/extractor" element={<Extractor></Extractor>}/>
+        <Route path="app/pruebas" element={<Json></Json>}/>
         <Route path="/app" element={<Layout></Layout>}>
           <Route index element={<NuevoPedido/>} />
           <Route path="nuevoPedido" element={<NuevoPedido/>}/>

@@ -4,5 +4,5 @@ from .views.document_views import SanitizePDFView # <--- Importas tu archivo
 
 urlpatterns = [
     # Aquí es donde el 404 se resuelve
-    path('supplier-docs/sanitize/', SanitizePDFView.as_view(), name='sanitize-pdf'),
+    path('sanitize-pdf/', SanitizePDFView.as_view(), name='sanitize-pdf'),
 ]

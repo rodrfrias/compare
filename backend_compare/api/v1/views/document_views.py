@@ -1,106 +1,158 @@
-"""
-views.py  (app: supplier_docs)
--------------------------------
-Expone el endpoint POST /api/supplier-docs/sanitize/
-
-Recibe un PDF via multipart/form-data (campo "pdf") y devuelve
-el PDF sanitizado como descarga, junto con metadata en los headers.
-
-Integración en urls.py:
-    from django.urls import path
-    from supplier_docs.views import SanitizePDFView
-
-    urlpatterns = [
-        path("api/supplier-docs/sanitize/", SanitizePDFView.as_view()),
-    ]
-"""
-
 import logging
-from django.http import HttpResponse, JsonResponse
+import json
+import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+from django.http import JsonResponse
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from api.services.pdf_service import sanitize_pdf, SanitizationResult
+from api.services.pdf_service import sanitize_pdf
+import base64
+
+# Cargamos las variables de entorno al iniciar
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-MAX_UPLOAD_BYTES = 500 * 1024 * 1024  # 500 MB — ajustable según plan del usuario
-
+# Límite de 500 MB
+MAX_UPLOAD_BYTES = 200 * 1024 * 1024 # Ajuste según plan de usuario.
 
 @method_decorator(csrf_exempt, name="dispatch")
 class SanitizePDFView(View):
-    """
-    POST /api/supplier-docs/sanitize/
-
-    Body (multipart/form-data):
-        pdf: archivo PDF del proveedor
-
-    Respuesta exitosa (200):
-        Content-Type: application/pdf
-        X-Original-Size, X-Clean-Size, X-Reduction-Percent,
-        X-Pages-Processed, X-Images-Removed  (para debug / logs del frontend)
-        Body: bytes del PDF sanitizado
-
-    Respuesta de error (400 / 413 / 500):
-        Content-Type: application/json
-        Body: { "error": "descripción" }
-    """
-
     http_method_names = ["post"]
 
     def post(self, request):
         pdf_file = request.FILES.get("pdf")
 
-        # --- Validaciones de entrada ---
         if not pdf_file:
-            return JsonResponse(
-                {"error": "Campo 'pdf' requerido (multipart/form-data)."},
-                status=400,
-            )
-
-        if not pdf_file.name.lower().endswith(".pdf"):
-            return JsonResponse(
-                {"error": "El archivo debe tener extensión .pdf"},
-                status=400,
-            )
+            return JsonResponse({"error": "Campo 'pdf' requerido."}, status=400)
 
         if pdf_file.size > MAX_UPLOAD_BYTES:
-            return JsonResponse(
-                {
-                    "error": (
-                        f"El archivo supera el límite de "
-                        f"{MAX_UPLOAD_BYTES // (1024*1024)} MB."
-                    )
-                },
-                status=413,
+            return JsonResponse({"error": "Archivo demasiado grande."}, status=413)
+
+        try:
+            # 1. Leemos el archivo original
+            file_bytes = pdf_file.read()
+            
+            # 2. Ejecutamos tu lógica de sanitización (sin imágenes)
+            result = sanitize_pdf(file_bytes)
+            if not result.success:
+                return JsonResponse({"error": result.error}, status=422)
+
+            # 3. Enviamos el PDF sanitizado (bytes) directamente a la IA
+            ai_json_response = enviar_pdf_a_gemini(
+                result.clean_pdf_bytes, 
+                pdf_file.name
             )
 
-        # --- Sanitización ---
-        try:
-            file_bytes = pdf_file.read()
+            if ai_json_response:
+                return JsonResponse(ai_json_response, safe=False, status=200)
+            else:
+                return JsonResponse({"error": "Error al procesar con IA."}, status=500)
+
         except Exception as exc:
-            logger.error("Error al leer el archivo subido: %s", exc)
-            return JsonResponse({"error": "No se pudo leer el archivo."}, status=500)
+            logger.error("Error en SanitizePDFView: %s", exc)
+            return JsonResponse({"error": "Error interno."}, status=500)
 
-        result = sanitize_pdf(file_bytes)
+# --- Función de Servicio para Gemini ---
 
-        if not result.success:
-            return JsonResponse({"error": result.error}, status=422)
+def enviar_pdf_a_gemini(pdf_bytes, file_name):
+    """
+    Envía el contenido binario del PDF sanitizado a Gemini.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY")
+    
+    if not api_key:
+        logger.error("GEMINI_API_KEY no configurada en el entorno.")
+        return None
 
-        # --- Respuesta ---
-        response = HttpResponse(
-            result.clean_pdf_bytes,
-            content_type="application/pdf",
-        )
-        response["Content-Disposition"] = (
-            f'attachment; filename="sanitized_{pdf_file.name}"'
-        )
+    genai.configure(api_key=api_key)
+    
+    # Configuramos el modelo para que la respuesta sea un JSON válido
+    generation_config = {
+        "temperature": 0.1, # Baja temperatura para mayor precisión en datos
+        "response_mime_type": "application/json",
+    }
 
-        # Headers informativos (útiles para logging en el frontend)
-        response["X-Original-Size"] = result.original_size_bytes
-        response["X-Clean-Size"] = result.clean_size_bytes
-        response["X-Reduction-Percent"] = f"{result.reduction_percent:.1f}"
-        response["X-Pages-Processed"] = result.pages_processed
-        response["X-Images-Removed"] = result.images_removed
+    model = genai.GenerativeModel(
+    model_name='models/gemini-2.5-flash', # Actualizado a la versión disponible en 2026
+    generation_config=generation_config
+    )
 
-        return response
+    prompt = """
+    Contexto: Eres un experto en extracción de datos comerciales y análisis de catálogos de proveedores para el mercado de consumo masivo (Argentina). Tu objetivo es transformar el texto de catálogos, listas de precios o folletos en datos estructurados (JSON) altamente normalizados.
+
+    Tarea: Analiza el documento provisto y genera un JSON siguiendo estrictamente las reglas de negocio detalladas.
+
+    1. Identificación del Proveedor y Tipo de Comercio:
+
+    Extrae: nombre, CUIT, condicion_iva, email, telefono, direccion, localidad, provincia y código postal.
+
+    Determina tipo_comercio: "MAYORISTA" (si hay CUIT/precios netos) o "MINORISTA" (precios finales/ofertas al público).
+
+    Regla de Ausencia: Si un dato no está explícito, coloca obligatoriamente "-".
+
+    2. Normalización de Productos y Nomenclatura:
+
+    Estandariza los nombres para evitar duplicidad semántica.
+
+    Formato: [Nombre del Producto] [Variante/Sabor] [Marca].
+
+    Normaliza unidades: Asegura consistencia (ej: "500ml" en lugar de "0.5L").
+
+    3. Lógica de Precios y IVA (Cálculo Unitario Crítico):
+
+    Precio Unitario Neto: Debes devolver siempre el precio por UNIDAD INDIVIDUAL.
+
+    Regla de División: Si el producto viene en pack, caja o kit (ej: "Pack x6", "Kit 30un"), DEBES dividir el precio total por la cantidad de unidades y colocar el resultado en precio_unitario_neto.
+
+    Regla de IVA (Numérica): * Si el IVA está discriminado (Mayorista), coloca el valor flotante correspondiente (21.0, 10.5, etc.).
+
+    IMPORTANTE: Si el documento indica "IVA incluido", "Precio Final" o es un catálogo MINORISTA, coloca obligatoriamente el valor 0.0 en la propiedad iva.
+
+    Nota: Yerba, Aceite y Harina suelen tributar 10.5% en facturas mayoristas.
+
+    {
+    "proveedor": {
+        "nombre": "string",
+        "cuit": "string",
+        "condicion_iva": "string",
+        "email": "string",
+        "telefono": "string",
+        "direccion": "string",
+        "localidad": "string",
+        "provincia": "string",
+        "cp": "string",
+        "tipo_comercio": "MAYORISTA | MINORISTA"
+    },
+    "productos": [
+        {
+        "categoria": "string",
+        "nombre_normalizado": "string",
+        "marca": "string",
+        "modelo": "string",
+        "presentacion": "string",
+        "precio_unitario_neto": float,
+        "iva": float
+        }
+    ]
+    }
+    """
+
+    try:
+        # Paso 2: Convertir los bytes a texto Base64
+        pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
+
+        response = model.generate_content([
+            prompt,
+            {
+                "mime_type": "application/pdf",
+                "data": pdf_base64  # <--- Ahora le enviamos el "texto" de la foto
+            }
+        ])
+        
+        return json.loads(response.text)
+    except Exception as e:
+        logger.error(f"Error en API Gemini: {e}")
+        return None

@@ -47,9 +47,9 @@ const TablaProductos = () => {
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">modelo</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">presentacion</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">proveedor</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right whitespace-nowrap">unitario (Neto)</th>
+                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right whitespace-nowrap">precio neto p/u</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">iva %</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-righ whitespace-nowrap">precio con iva</th>
+                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-righ whitespace-nowrap">precio final</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right whitespace-nowrap">ahorro por unidad</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">cantidad</th>
                 <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right">subtotal</th>
