@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import productosRaw from '../../utilities/productos.js';
 
-const ResponsableInscripto = () => {
+const TablaProductos = () => {
   
   const [listaProductos, setListaProductos] = useState(
     [...productosRaw]
@@ -65,11 +65,12 @@ const ResponsableInscripto = () => {
                     <td className="px-2 py-3 text-[11px] text-gray-700 font-bold">{prod.nombre}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700">{prod.marca}</td>
                     <td className="px-2 py-3 text-[11px] text-gray-700">{prod.proveedor_nombre}</td>
-                    <td className="px-2 py-3 text-[11px] text-right text-gray-900">-</td>
+                    <td className="px-2 py-3 text-[11px] text-right text-gray-900">Condicion</td>
+                    <td className="px-2 py-3 text-[11px] text-right text-gray-900">Precio P/U</td>
                     <td className="px-2 py-3 text-center">
                       <input 
                         type="number" 
-                        value={prod.iva} 
+                        value={prod.alicuota_detectada} 
                         onChange={(e) => handleIvaChange(prod.id, e.target.value)}
                         onClick={(e) => e.stopPropagation()}
                         className="w-12 h-7 text-center border border-gray-200 text-[11px] focus:outline-none focus:border-black"
@@ -97,14 +98,14 @@ const ResponsableInscripto = () => {
       </div>
 
       {/* Sección de Totales */}
-      <div className="flex flex-row justify-end mt-2 mx-4 mb-2 gap-3 font-mono">
+      <div className="flex flex-row justify-end mt-2 mx-4 mb-2 gap-3 font-sans">
 
         {/* Tarjeta Ahorro */}
         <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-85 border border-black/10">
           <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">ahorro total</p>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-[13px] font-medium text-gray-400">ARS</span>
-            <span className="text-[24px] font-extrabold text-green-950 leading-none">-</span>
+            <span className="text-[24px] font-extrabold text-green-900 leading-none">$ 9.453,00</span>
           </div>
           <p className="text-[12px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
         </div>
@@ -114,7 +115,7 @@ const ResponsableInscripto = () => {
           <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">total</p>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-[13px] font-medium text-gray-400">ARS</span>
-            <span className="text-[24px] font-extrabold text-slate-800 leading-none">-</span>
+            <span className="text-[24px] font-extrabold text-slate-800 leading-none">$ 143.234,00</span>
           </div>
           <p className="text-[12px] text-gray-400 text-center mt-0.5">No incluye envío ni impuestos provinciales.</p>
         </div>
@@ -124,4 +125,4 @@ const ResponsableInscripto = () => {
   );
 };
 
-export default ResponsableInscripto;
+export default TablaProductos;
