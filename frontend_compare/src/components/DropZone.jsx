@@ -3,7 +3,7 @@ import { BiSolidFilePdf } from "react-icons/bi";
 
 // Sub-componente optimizado (se mantiene igual, con shrink-0 para evitar colapso interno)
 const FileProgressItem = ({ fileName, progress, size, timeLeft }) => (
-  <div className="flex items-center gap-3 border border-gray-200 rounded-lg px-3 py-1 w-full bg-[#f5f3ee] shrink-0">
+  <div className="flex items-center gap-3 border border-gray-300 rounded-lg px-3 py-1 w-full bg-white shrink-0">
     <div className="shrink-0 w-5 h-5 bg-red-600 rounded-md flex items-center justify-center text-white">
       <BiSolidFilePdf size={30} />
     </div>
@@ -33,17 +33,17 @@ const FileProgressItem = ({ fileName, progress, size, timeLeft }) => (
 const DropZone = () => {
   return (
     /* Contenedor Principal: h-full y flex-col para establecer el contexto de altura */
-    <div className="w-full h-full px-8 py-6 flex flex-col bg-[#f5f3ee]bg-gray-50 overflow-hidden">
+    <div className="w-full h-full px-8 py-6 flex flex-col bg-white overflow-hidden">
       
       {/* Header: shrink-0 para que no se aplaste */}
       <div className="flex items-center justify-center mb-4 shrink-0">
-        <span className="text-gray-900 font-semibold text-lg leading-tight text-center">
+        <span className="text-gray-900 font-semibold text-[25px] leading-tight text-center">
           ¡Hola Rodrigo, sube tus documentos y busquemos el mejor precio hoy!
         </span>
       </div>
 
       {/* Drop area: shrink-0 para mantener tamaño fijo */}
-      <div className="border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center py-6 gap-2 bg-[#f5f3ee] cursor-pointer hover:border-gray-800 hover:bg-gray-50 transition-colors shrink-0">
+      <div className="border-2 border-dashed bg-gray-50 border-gray-300 rounded-xl flex flex-col items-center justify-center py-6 gap-2  cursor-pointer transition-colors shrink-0">
         <div className="text-gray-400">
           <RiFileUploadLine size={40} color="black" />
         </div>
@@ -65,8 +65,8 @@ const DropZone = () => {
         <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
         <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
         <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-    
-
+        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
+        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
       </div>
 
       {/* Footer: shrink-0 y borde superior */}
