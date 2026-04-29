@@ -157,112 +157,148 @@ const MiNegocio = () => {
       {/* ── Tab: Preview PDF ── */}
       {tab === 'preview' && (
         <div className="flex-1 overflow-y-auto p-8 flex flex-col items-center gap-6">
-          
-          <div className="w-[794px] min-h-[1123px] bg-white border border-black p-12 flex flex-col gap-8 mb-10">
+          <div className="w-[794px] min-h-[1123px] bg-white border border-black/20 p-12 flex flex-col gap-0 mb-10 font-sans text-[11px] text-gray-900">
 
-            {/* Encabezado */}
-            <div className="flex items-start justify-between border-b-2 border-gray-900 pb-6">
-              <div className="flex-1">
-                <p className="text-lg font-mono font-bold text-gray-900 uppercase tracking-wide mb-2">
-                  Distribuidora Central S.R.L.
+            {/* ── Encabezado ── */}
+            <div className="flex items-start justify-between mb-2">
+              <div>
+                <p className="text-[17px] font-bold text-gray-900">Nombre de la Compañía</p>
+                <p className="italic text-[10px] text-gray-500 mb-2">Eslogan de su compañía</p>
+                <p className="text-[10px] text-gray-700 leading-tight">
+                  CUIT: 30-71234567-8 · Responsable Inscripto<br />
+                  Dirección · Ciudad, Provincia, CP<br />
+                  Tel: 123.456.7890 · email@empresa.com.ar
                 </p>
-                <div className="text-[12.5px] font-mono text-gray-700 space-y-1">
-                  <p>CUIT: 30-71234567-8</p>
-                  <p>Condición IVA: Responsable Inscripto</p>
-                  <p>Av. Corrientes 1234, Piso 5, Of. 12</p>
-                  <p>CABA (C1043) · Buenos Aires</p>
-                  <p className="pt-1">Tel: 11 4567-8900 · lmartinez@empresaejemplo.com.ar</p>
+              </div>
+              <div className="text-right">
+                <p className="text-[38px] font-black text-gray-400 leading-tight tracking-tight">
+                  ORDEN DE<br />COMPRA
+                </p>
+              </div>
+            </div>
+
+            {/* ── Aviso N° OC ── */}
+            <div className="mb-6">
+              <p className="text-[10px] text-gray-600 leading-relaxed mb-3">
+                El siguiente número debe figurar en toda la correspondencia,<br />
+                remitos y facturas vinculadas a este pedido:
+              </p>
+              <p className="font-bold text-[13px]">N° O/C: OC-2026-00001</p>
+            </div>
+
+            {/* ── Para / Entregar en ── */}
+            <div className="grid grid-cols-2 mb-6">
+              <div className="text-[11px] leading-relaxed">
+                <p className="font-bold text-[11px] mb-1">Para (Proveedor):</p>
+                <p className="text-gray-600">Razón Social</p>
+                <p className="text-gray-600">CUIT: XX-XXXXXXXX-X</p>
+                <p className="text-gray-600">Condición IVA: Responsable Inscripto</p>
+                <p className="text-gray-600">Dirección · Ciudad, Provincia</p>
+                <p className="text-gray-600">Tel / Email</p>
+              </div>
+              <div className="text-[11px] leading-relaxed">
+                <p className="font-bold text-[11px] mb-1">Entregar en:</p>
+                <p className="text-gray-600">Razón Social / Nombre</p>
+                <p className="text-gray-600">Dirección de entrega</p>
+                <p className="text-gray-600">Ciudad, Provincia, CP</p>
+                <p className="text-gray-600">Contacto / Tel</p>
+              </div>
+            </div>
+
+            {/* ── Tabla de metadatos ── */}
+            <table className="w-full border-collapse mb-6">
+              <thead>
+                <tr className="bg-gray-100">
+                  {['FECHA DE O/C', 'SOLICITANTE', 'CONDICIÓN DE PAGO', 'PLAZO DE ENTREGA', 'OBSERVACIONES'].map((h, i) => (
+                    <th key={i} className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left uppercase">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-800 px-2 h-7"></td>
+                  <td className="border border-gray-800 px-2 h-7"></td>
+                  <td className="border border-gray-800 px-2 h-7 text-gray-400 italic">30 días / contado / etc.</td>
+                  <td className="border border-gray-800 px-2 h-7 text-gray-400 italic">X días hábiles</td>
+                  <td className="border border-gray-800 px-2 h-7 w-[25%]"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            {/* ── Tabla de productos ── */}
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left w-[8%]">CANT.</th>
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left w-[10%]">UNIDAD</th>
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left w-[42%]">DESCRIPCIÓN</th>
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left w-[12%]">CÓDIGO</th>
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-right w-[14%]">PRECIO UNIT. NETO</th>
+                  <th className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-right w-[14%]">SUBTOTAL NETO</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 9 }).map((_, i) => (
+                  <tr key={i}>
+                    <td className="border border-gray-800 px-2 h-7"></td>
+                    <td className="border border-gray-800 px-2 h-7"></td>
+                    <td className="border border-gray-800 px-2 h-7"></td>
+                    <td className="border border-gray-800 px-2 h-7"></td>
+                    <td className="border border-gray-800 px-2 h-7 text-right text-gray-400">$</td>
+                    <td className="border border-gray-800 px-2 h-7 text-right text-gray-400">$</td>
+                  </tr>
+                ))}
+                {/* Totales */}
+                {[
+                  { label: 'SUBTOTAL NETO', value: '$ -' },
+                  { label: 'IVA 21%', value: '$ -' },
+                  { label: 'IVA 10,5% (si aplica)', value: '$ -', muted: true },
+                  { label: 'Perc. IIBB (si aplica)', value: '$ -', muted: true },
+                  { label: 'TOTAL', value: '$ -', bold: true },
+                ].map(({ label, value, bold, muted }, i) => (
+                  <tr key={i}>
+                    <td colSpan={4} className="border-none px-2"></td>
+                    <td className={`px-2 py-1 text-right text-[10px] border border-gray-800 bg-white ${bold ? 'font-bold' : ''} ${muted ? 'text-gray-400 text-[9px]' : ''}`}>
+                      {label}
+                    </td>
+                    <td className={`border border-gray-800 px-2 py-1 text-right text-[11px] ${bold ? 'font-bold bg-gray-50' : ''}`}>
+                      {value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* ── Footer ── */}
+            <div className="grid grid-cols-2 gap-8 mt-8">
+              <div className="text-[10px] text-gray-800">
+                <ol className="list-decimal pl-4 space-y-1.5">
+                  <li>Emitir factura a nombre de la empresa compradora con los datos del encabezado.</li>
+                  <li>El número de O/C debe figurar en la factura y en el remito de entrega.</li>
+                  <li>Respetar precios, cantidades y condiciones pactadas en este documento.</li>
+                  <li>Notificar con anticipación cualquier imposibilidad de cumplimiento.</li>
+                  <li>
+                    <span className="font-bold uppercase text-[9px]">Enviar documentación a:</span>
+                    <div className="pl-4 mt-1 space-y-0.5 text-gray-600">
+                      <p>Nombre del contacto</p>
+                      <p>Dirección</p>
+                      <p>Tel:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:</p>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div className="border border-gray-800 flex flex-col">
+                <p className="px-3 py-1 font-bold text-[10px] border-b border-gray-800 bg-gray-100">AUTORIZACIÓN</p>
+                <div className="flex-1 min-h-[70px]"></div>
+                <div className="grid grid-cols-2 border-t border-gray-800">
+                  <span className="px-3 py-1 text-[9px] border-r border-gray-800 text-gray-500 italic">Autorizado por</span>
+                  <span className="px-3 py-1 text-[9px] text-gray-500 italic">Fecha</span>
                 </div>
               </div>
-              <div className="text-right ml-8">
-                <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-gray-900 font-bold mb-3">
-                  Orden de compra
-                </p>
-                <p className="text-[12.5px] font-mono text-gray-700">
-                  N° <span className="font-bold text-gray-900">OC-2026-00127</span>
-                </p>
-                <p className="text-[12.5px] font-mono text-gray-700">
-                  Fecha: <span className="font-bold text-gray-900">24/04/2026</span>
-                </p>
-              </div>
             </div>
 
-            {/* Proveedor */}
-            <div className="border border-gray-900 rounded-sm px-6 py-5 bg-gray-50/50">
-              <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-2">
-                Proveedor destinatario
-              </p>
-              <p className="text-[14.5px] font-mono font-bold text-gray-900 mb-1">
-                Papelera del Plata S.A.
-              </p>
-              <div className="text-[12.5px] font-mono text-gray-700 space-y-0.5">
-                <p>CUIT: 30-65432198-7 · Responsable Inscripto</p>
-                <p>ventas@papeleradelplata.com.ar · 11 5234-9000</p>
-                <p>Av. Juan B. Justo 3456 · CABA (C1425)</p>
-              </div>
-            </div>
-
-            {/* ── Tabla de productos (7 Columnas de igual ancho y bordes completos) ── */}
-            <div className="w-full mt-4 border-x border-t border-gray-900"> 
-              
-              {/* Encabezado con grid-cols-7 */}
-              <div className="grid grid-cols-7 bg-[#f8fafc] px-5 py-2 border-b border-gray-900">
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold">Código</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold">Producto</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Marca</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Modelo</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-center">Present.</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-right">Precio</p>
-                <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-gray-700 font-bold text-right">Cant</p>
-              </div>
-
-              {/* Filas */}
-              <div className="border-b border-gray-900">
-                {rows.map((row, i) => (
-                  <div
-                    key={i}
-                    className={`grid grid-cols-7 px-5 py-2 items-center ${
-                      i < rows.length - 1 ? 'border-b border-gray-100' : ''
-                    }`}
-                  >
-                    <p className="text-[11px] font-mono text-gray-400">{row.codigo}</p>
-                    <p className="text-[12px] font-mono text-gray-900 font-medium uppercase truncate">{row.nombre}</p>
-                    <p className="text-[11px] font-mono text-gray-600 text-center">{row.marca}</p>
-                    <p className="text-[11px] font-mono text-gray-600 text-center">{row.modelo}</p>
-                    <p className="text-[11px] font-mono text-gray-600 text-center">Unidad</p>
-                    <p className="text-[12px] font-mono text-gray-900 text-right">{row.precio}</p>
-                    <p className="text-[12px] font-mono text-gray-900 text-right font-medium">{row.cantidad}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Condiciones */}
-            <div className="mt-auto border-t border-gray-300 pt-6 space-y-4">
-              <div>
-                <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">Metodo de pago</p>
-                <p className="text-[12px] font-mono text-gray-700">Transferencia Bancaria</p>
-              </div>
-              <div>
-                <p className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-gray-500 mb-1.5">Lugar de entrega</p>
-                <p className="text-[12px] font-mono text-gray-700">Av. Corrientes 1234, Piso 5, Of. 12 · CABA (C1043)</p>
-              </div>
-            </div>
-
-            {/* Pie de página con Indicador de Página */}
-            <div className="border-t-2 border-gray-200 pt-6 flex justify-between items-end">
-              <div className="max-w-[80%]">
-                <p className="text-[11px] font-mono text-gray-500">
-                  Solicitante: <span className="text-gray-900 font-semibold">Laura Martínez</span> · lmartinez@empresaejemplo.com.ar
-                </p>
-                <p className="text-[10.5px] font-mono text-gray-400 mt-2 leading-relaxed">
-                  Documento generado automáticamente por Compare. Esta orden de compra no constituye factura ni comprobante fiscal válido según normas de AFIP.
-                </p>
-              </div>
-              <p className="text-[11px] font-mono font-bold text-gray-900 uppercase tracking-widest">
-                Pagina 1
-              </p>
-            </div>
           </div>
         </div>
       )}
