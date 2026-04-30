@@ -55,7 +55,7 @@ const TablaProductos = () => {
             placeholder="Buscar por Nombre, Código ó Marca..."
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            className="w-full h-8 px-3 bg-white border border-gray-200 rounded-xs font-mono text-[14px] focus:outline-none focus:border-black transition-colors shadow-sm"
+            className="w-full h-8 px-3 bg-white border border-gray-200 rounded-xs font-mono text-[12px] focus:outline-none focus:border-black transition-colors shadow-sm"
           />
           {filtro && (
             <button 
