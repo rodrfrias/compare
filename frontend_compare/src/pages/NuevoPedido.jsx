@@ -1,6 +1,5 @@
 import React from 'react'
 import DropZone from '../components/DropZone.jsx'
-import Metricas from '../components/Metricas.jsx'
 import TablaProductos from '../components/Tablas/TablaProductos.jsx'
 
 const NuevoPedido = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const MiNegocio = () => {
-  const [tab, setTab] = useState('preview')
+  const [tab, setTab] = useState('datos')
 
   const inputClass =
     'w-full border border-black/10 rounded-sm bg-white px-3 py-2.5 text-[13px] text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-black/30 transition-colors'
