@@ -68,7 +68,7 @@ const TablaProductos = () => {
         </div>
       </div>
 
-      <div className="w-full h-[75vh] flex flex-col overflow-hidden bg-white rounded-xs shadow-sm border border-gray-200">
+      <div className="w-full h-[75vh] flex flex-col overflow-hidden bg-white rounded-xs border border-gray-200">
         <div className="grow overflow-auto">
           <table className="w-full border-collapse text-left font-mono leading-tight">
             <thead>
@@ -152,7 +152,7 @@ const TablaProductos = () => {
           <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">ahorro total</p>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-[13px] font-medium text-gray-400">ARS</span>
-            <span className="text-[24px] font-extrabold text-green-900 leading-none">$ 9.453,00</span>
+            <span className="text-[24px] font-extrabold text-green-800 leading-none">$ 9.453,00</span>
           </div>
           <p className="text-[12px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
         </div>
