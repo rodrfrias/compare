@@ -41,8 +41,8 @@ const Sidebar = () => {
           <li
             className={`group cursor-pointer rounded-lg transition-colors duration-150 py-1 px-3
             ${activeLink === link.id 
-              ? "bg-gray-100" // El Gris sutil y PLANO de la imagen (sin sombra)
-              : "hover:bg-gray-100/70" // Un hover aún más sutil
+              ? "bg-gray-100" 
+              : "hover:bg-gray-100/70" 
             }`}   
           >
             <Link 
@@ -50,9 +50,9 @@ const Sidebar = () => {
             className='flex justify-center md:justify-start items-center md:space-x-3'
             onClick={() => hadleClickLink(link.id)}
             >
-              <span className={`text-[14px] ${activeLink === link.id ? "text-gray-900" : "text-gray-500 group-hover:text-gray-700"}`}>
+              <span className={`text-[13px] ${activeLink === link.id ? "text-gray-900" : "text-gray-500 group-hover:text-gray-700"}`}>
                 {<link.icon />}</span>
-              <span className={`text-[11px] font-light hidden md:flex ${activeLink === link.id ? "text-gray-900" : "text-gray-600 group-hover:text-gray-800"}`}>
+              <span className={`text-[10px] font-light hidden md:flex ${activeLink === link.id ? "text-gray-900" : "text-gray-600 group-hover:text-gray-800"}`}>
                     {link.name}</span>
             </Link>
           </li>
@@ -66,8 +66,8 @@ const Sidebar = () => {
           <li
             className={`group cursor-pointer rounded-lg transition-colors duration-150 py-1 px-3
             ${activeLink === link.id 
-              ? "bg-gray-100" // El Gris sutil y PLANO de la imagen (sin sombra)
-              : "hover:bg-gray-100/70" // Un hover aún más sutil
+              ? "bg-gray-100" 
+              : "hover:bg-gray-100/70" 
             }`}   
           >
             <Link
@@ -75,9 +75,9 @@ const Sidebar = () => {
             className='flex justify-center md:justify-start items-center md:space-x-3'
             onClick={() => hadleClick(link.id)}
             >
-              <span className={`text-[14px] ${activeLink === link.id ? "text-gray-900" : "text-gray-500 group-hover:text-gray-700"}`}>
+              <span className={`text-[13px] ${activeLink === link.id ? "text-gray-900" : "text-gray-500 group-hover:text-gray-700"}`}>
                 {<link.icon />}</span>
-              <span className={`text-[11px] font-light  hidden md:flex ${activeLink === link.id ? "text-gray-900" : "text-gray-600 group-hover:text-gray-800"}`}>
+              <span className={`text-[10px] font-light  hidden md:flex ${activeLink === link.id ? "text-gray-900" : "text-gray-600 group-hover:text-gray-800"}`}>
                     {link.name}</span>
             </Link>
           </li>

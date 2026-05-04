@@ -55,7 +55,7 @@ const TablaProductos = () => {
             placeholder="Buscar por Nombre, Código ó Marca..."
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            className="w-full h-8 px-3 bg-white border border-gray-200 rounded-xs font-mono text-[12px] focus:outline-none focus:border-black transition-colors shadow-sm"
+            className="w-full h-8 px-3 bg-white border border-gray-200 rounded-xs font-mono text-[11px] focus:outline-none focus:border-black transition-colors shadow-sm"
           />
           {filtro && (
             <button 
@@ -81,17 +81,17 @@ const TablaProductos = () => {
                     className="accent-black" 
                   />
                 </th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">codigo</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">nombre</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">marca</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">proveedor</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold">condicion proveedor</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right">precio neto p/u</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">iva</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right">precio final</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right">ahorro p/u</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-center">cantidad</th>
-                <th className="px-2 py-3 text-[11px] uppercase text-gray-500 font-bold text-right">subtotal</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold">codigo</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold">nombre</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold">marca</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold">proveedor</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold">condicion proveedor</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-right">precio neto p/u</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-center">iva</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-right">precio final</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-right">ahorro p/u</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-center">cantidad</th>
+                <th className="px-2 py-3 text-[10px] uppercase text-gray-500 font-bold text-right">subtotal</th>
               </tr>
             </thead>
             <tbody>
@@ -103,23 +103,24 @@ const TablaProductos = () => {
                       <td className="px-2 py-3 text-center">
                         <input type="checkbox" checked={isSelected} readOnly className="accent-black" />
                       </td>
-                      <td className="px-2 py-3 text-[11px] text-gray-700">{prod.codigo}</td>
-                      <td className="px-2 py-3 text-[11px] text-gray-700 font-bold">{prod.nombre}</td>
-                      <td className="px-2 py-3 text-[11px] text-gray-700">{prod.marca}</td>
-                      <td className="px-2 py-3 text-[11px] text-gray-700">{prod.proveedor_nombre}</td>
-                      <td className="px-2 py-3 text-[11px] text-right text-gray-900">Condicion</td>
-                      <td className="px-2 py-3 text-[11px] text-right text-gray-900">Precio P/U</td>
+                      <td className="px-2 py-3 text-[9px] text-gray-700">{prod.codigo}</td>
+                      <td className="px-2 py-3 text-[9px] text-gray-700 font-bold">{prod.nombre}</td>
+                      <td className="px-2 py-3 text-[9px] text-gray-700">{prod.marca}</td>
+                      <td className="px-2 py-3 text-[9px] text-gray-700">{prod.proveedor_nombre}</td>
+                      <td className="px-2 py-3 text-[9px] text-right text-gray-900">Condicion</td>
+                      <td className="px-2 py-3 text-[9px] text-right text-gray-900">Precio P/U</td>
                       <td className="px-2 py-3 text-center">
                         <input 
                           type="number" 
+                          min = {0}
                           value={prod.iva} 
                           onChange={(e) => handleIvaChange(prod.id, e.target.value)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-12 h-7 text-center border border-gray-200 text-[11px] focus:outline-none focus:border-black"
+                          className="w-9 h-7 text-center border border-gray-200 text-[11px] focus:outline-none focus:border-black"
                         />
                       </td>
-                      <td className="px-2 py-3 text-[11px] text-right text-gray-900">-</td>
-                      <td className="px-2 py-3 text-[13px] text-green-950 text-right font-bold">-</td>
+                      <td className="px-2 py-3 text-[9px] text-right text-gray-900">-</td>
+                      <td className="px-2 py-3 text-[9px] text-green-950 text-right font-bold">-</td>
                       <td className="px-2 py-3 text-center">
                         <input
                           type="number"
@@ -127,7 +128,7 @@ const TablaProductos = () => {
                           value={cantidades[prod.id]}
                           onChange={(e) => handleCantidadChange(prod.id, e.target.value)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-10 h-7 text-center border border-gray-300 text-[11px]"
+                          className="w-9 h-7 text-center border border-gray-300 text-[11px]"
                         />
                       </td>
                       <td className="px-2 py-3 text-[12px] text-slate-800 text-right font-bold">-</td>
@@ -149,18 +150,18 @@ const TablaProductos = () => {
       {/* Totales (Sin cambios) */}
       <div className="flex flex-row justify-end mt-2 -mb-2 gap-3 font-sans">
         <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-85 border border-black/10">
-          <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">ahorro total</p>
+          <p className="text-[12px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">ahorro total</p>
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-[13px] font-medium text-gray-400">ARS</span>
-            <span className="text-[24px] font-extrabold text-green-800 leading-none">$ 9.453,00</span>
+            <span className="text-[12px] font-medium text-gray-400">ARS</span>
+            <span className="text-[20px] font-extrabold text-green-800 leading-none">$ 9.453,00</span>
           </div>
-          <p className="text-[12px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
+          <p className="text-[11px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
         </div>
         <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-[340px] border border-black/10">
-          <p className="text-[13px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">total</p>
+          <p className="text-[12px] font-bold uppercase tracking-widest text-gray-400 mb-0.5">total</p>
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-[13px] font-medium text-gray-400">ARS</span>
-            <span className="text-[24px] font-extrabold text-slate-800 leading-none">$ 143.234,00</span>
+            <span className="text-[12px] font-medium text-gray-400">ARS</span>
+            <span className="text-[20px] font-extrabold text-slate-800 leading-none">$ 143.234,00</span>
           </div>
           <p className="text-[12px] text-gray-400 text-center mt-0.5">No incluye envío ni impuestos provinciales.</p>
         </div>
