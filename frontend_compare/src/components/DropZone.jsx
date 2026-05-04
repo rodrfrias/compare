@@ -1,109 +1,140 @@
-import { RiFileUploadLine, RiCloseLine } from "react-icons/ri";
-import { BiSolidFilePdf } from "react-icons/bi";
+import React, { useState } from 'react';
 
-const FileProgressItem = ({ fileName, progress, size, timeLeft }) => (
-  <div className="flex items-center gap-3 border rounded-lg px-3 py-2 w-full shrink-0"
-    style={{ background: "#ffffff", borderColor: "#e5e5e5" }}>
-    <div className="shrink-0 w-7 h-7 bg-red-700 rounded-md flex items-center justify-center text-white">
-      <BiSolidFilePdf size={16} />
-    </div>
+/**
+ * Componente DropXone
+ * Estética inspirada en aplicaciones de escritorio (JavaFX/Swing)
+ * Gris neutro, bordes definidos y acentos azules en interacción.
+ */
+const DropXone = () => {
+  // Estado para simular archivos cargados
+  const [archivos, setArchivos] = useState([
+    { id: 1, nombre: "CV_Rodrigo_2024.docx", progreso: 60, tipo: "DOCX" },
+    { id: 2, nombre: "DNI_Frente.jpg", progreso: 100, tipo: "JPG" },
+    { id: 3, nombre: "Factura_A_001.pdf", progreso: 100, tipo: "PDF" }
+  ]);
 
-    <div className="flex-1 min-w-0">
-      <div className="flex items-center justify-between mb-1">
-        <span className="truncate"
-          style={{ fontSize: "10px", fontWeight: 600, color: "#1a1a1a", letterSpacing: "0.02em", fontFamily: "'Courier New', Courier, monospace" }}>
-          {fileName}
-        </span>
-        <button className="ml-2 shrink-0 transition-colors" style={{ color: "#aaa" }}>
-          <RiCloseLine size={15} />
-        </button>
-      </div>
+  // Componente de Botón unificado para toda la App
+  const BotonJavaFX = ({ children, onClick, className = "", variant = "gray" }) => {
+    const variants = {
+      gray: "bg-[#e1e1e1] border-gray-400 text-gray-700 hover:bg-[#e8e8e8] active:bg-[#d4d4d4]",
+      dark: "bg-[#222] border-black text-white hover:bg-black active:bg-gray-900"
+    };
+    
+    return (
+      <button 
+        onClick={onClick}
+        className={`h-7 px-4 border font-sans text-[10px] uppercase tracking-wider shadow-sm transition-all duration-200 outline-none hover:border-blue-400 ${variants[variant]} ${className}`}
+      >
+        {children}
+      </button>
+    );
+  };
 
-      <div className="flex items-center gap-2">
-        <div className="flex-1 rounded-full" style={{ height: "2px", background: "#f0f0f0" }}>
-          <div
-            className="rounded-full transition-all duration-300"
-            style={{ width: `${progress}%`, height: "2px", background: "#1a1a1a" }}
-          />
-        </div>
-        <span className="shrink-0"
-          style={{ fontSize: "9px", color: "#888", letterSpacing: "0.04em", fontFamily: "'Courier New', Courier, monospace" }}>
-          {progress}%
-        </span>
-      </div>
-
-      <p style={{ fontSize: "9px", color: "#999", marginTop: "3px", letterSpacing: "0.03em", fontFamily: "'Courier New', Courier, monospace" }}>
-        {size} · Queda {timeLeft}
-      </p>
-    </div>
-  </div>
-);
-
-const DropZone = () => {
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden"
-      style={{ background: "#ffffff", fontFamily: "'Courier New', Courier, monospace" }}>
-
-      {/* Header */}
-      <div className="flex items-center justify-center mb-4 shrink-0 px-8 pt-6">
-        <span 
-          className="text-center text-[18px] text-black/90 tracking-tight"
-          style={{ 
-            fontFamily: "Arial, Helvetica, sans-serif", 
-            fontWeight: "700" 
-          }}
+    <div className='w-full h-full flex flex-col bg-[#f5f3ee] p-4 gap-6 font-sans'>
+      
+      {/* SECCIÓN: CARGA DE DOCUMENTOS */}
+      <section className="flex flex-col gap-3">
+        <div className="flex justify-between items-end border-b border-gray-300 pb-1">
+          <h2 className="text-[11px] font-bold text-gray-600 uppercase tracking-widest">
+            Documentación del Responsable
+          </h2>
+          <span className="text-[9px] text-gray-400 uppercase font-medium">
+            Formatos admitidos: PDF, JPG, PNG
+          </span>
+        </div>
+        
+        {/* ÁREA DE DROPZONE CORREGIDA */}
+        <div 
+          className="w-full border border-gray-300 bg-[#f9f9f9] p-10 flex flex-col items-center justify-center gap-3 hover:border-blue-400 hover:bg-white transition-all cursor-pointer group"
+          onDragOver={(e) => e.preventDefault()}
         >
-          ¡Hola Rodrigo, sube tus documentos y busquemos el mejor precio hoy!
-        </span>
-      </div>
+          {/* Icono de subir sobrio */}
+          <div className="w-10 h-10 border-2 border-gray-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
+            <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="square" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-[11px] text-gray-600 uppercase tracking-tight">
+              Arrastrá y soltá archivos o <span className="text-blue-600 font-bold underline">examinar equipo</span>
+            </p>
+            <p className="text-[9px] text-gray-400 mt-1 uppercase tracking-tighter">
+              Límite de carga: 50MB por archivo
+            </p>
+          </div>
+        </div>
 
-      {/* Drop area */}
-      <div className="mx-8 shrink-0 flex flex-col items-center justify-center py-8 gap-2 cursor-pointer rounded-xl"
-        style={{ border: "1.5px dashed #e5e5e5", background: "#fafafa" }}>
-        <RiFileUploadLine size={36} color="#555" />
-        <p style={{ fontSize: "12px", color: "#555", margin: 0, letterSpacing: "0.02em" }}>
-          Arrastrá y soltá o{" "}
-          <span style={{ color: "#1a1a1a", fontWeight: 700, textDecoration: "underline", cursor: "pointer" }}>
-            buscá un archivo
-          </span>{" "}
-          para subir
-        </p>
-        <p style={{ fontSize: "10px", color: "#999", margin: 0, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-          Tamaño máximo de archivo: 50 MB
-        </p>
-      </div>
+        {/* LISTA DE ARCHIVOS CARGADOS */}
+        <div className="flex flex-col border border-gray-300 bg-white shadow-sm">
+          {archivos.map((archivo, index) => (
+            <div 
+              key={archivo.id} 
+              className={`flex items-center gap-4 px-3 py-2 ${index !== archivos.length - 1 ? 'border-b border-gray-100' : ''} hover:bg-blue-50/30 transition-colors`}
+            >
+              {/* Icono de archivo cuadrado estilo Windows/Java */}
+              <div className="flex-shrink-0 w-7 h-9 bg-gray-100 border border-gray-300 flex items-center justify-center text-[8px] font-bold text-gray-500 leading-none text-center px-1">
+                {archivo.tipo}
+              </div>
 
-      {/* Accepted formats */}
-      <div className="flex items-center gap-2 mx-8 mt-4 shrink-0">
-        <span style={{ fontSize: "11px", color: "#555", letterSpacing: "0.02em" }}>Formatos permitidos:</span>
-        <span style={{ fontSize: "10px", color: "#888", letterSpacing: "0.06em", textTransform: "uppercase", background: "#f5f5f5", border: "1px solid #eee", borderRadius: "4px", padding: "2px 8px" }}>
-          PDF · JPG · PNG
-        </span>
-      </div>
+              {/* Info y Progreso */}
+              <div className="flex-grow flex flex-col gap-1">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-medium text-gray-700 truncate uppercase tracking-tighter">
+                    {archivo.nombre}
+                  </span>
+                  <span className="text-[9px] font-mono font-bold text-gray-400">
+                    {archivo.progreso === 100 ? "COMPLETADO" : `${archivo.progreso}%`}
+                  </span>
+                </div>
+                
+                {/* Progress Bar Plana */}
+                <div className="w-full h-1.5 bg-gray-100 border border-gray-200">
+                  <div 
+                    className={`h-full transition-all duration-500 ${archivo.progreso === 100 ? 'bg-blue-600' : 'bg-blue-400'}`} 
+                    style={{ width: `${archivo.progreso}%` }}
+                  ></div>
+                </div>
+              </div>
 
-      {/* File list */}
-      <div className="flex-1 min-h-0 flex flex-col gap-2 mt-4 mx-8 overflow-y-auto pr-1 custom-scrollbar">
-        <FileProgressItem fileName="CV_Rodrigo_2024.docx" progress={60} size="5.3 MB" timeLeft="1 min" />
-        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-        <FileProgressItem fileName="DNI_Frente.jpg" progress={100} size="1.2 MB" timeLeft="Completado" />
-      </div>
+              {/* Botón Eliminar */}
+              <button 
+                className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all text-lg"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setArchivos(archivos.filter(a => a.id !== archivo.id));
+                }}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          
+          {archivos.length === 0 && (
+            <div className="py-8 text-center text-[10px] text-gray-400 uppercase italic">
+              No hay archivos seleccionados
+            </div>
+          )}
+        </div>
+      </section>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between px-8 py-4 mt-auto shrink-0"
-        style={{ borderTop: "1px solid #f0f0f0" }}>
-        <button style={{ background: "none", border: "none", cursor: "pointer", fontSize: "10px", color: "#888", letterSpacing: "0.06em", textTransform: "uppercase", fontFamily: "'Courier New', Courier, monospace", padding: 0 }}>
-          Centro de ayuda
-        </button>
-        <button style={{ background: "#1a1a1a", border: "none", cursor: "pointer", fontSize: "10px", fontWeight: 700, color: "#fff", letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "'Courier New', Courier, monospace", padding: "8px 24px", borderRadius: "5px" }}>
-          Confirmar
-        </button>
-      </div>
+      {/* FOOTER DE ACCIONES UNIFICADO */}
+      <section className="mt-auto pt-4 border-t border-gray-300 flex justify-between items-center">
+        <div className="flex flex-col">
+          <span className="text-[9px] text-gray-400 italic">* Verifique que los datos sean legibles</span>
+          <span className="text-[9px] text-gray-400 italic">* Procesamiento seguro SSL</span>
+        </div>
+        
+        <div className="flex gap-2">
+          <BotonJavaFX onClick={() => console.log("Limpiar...")}>
+            Confirmar
+          </BotonJavaFX>
+        </div>
+      </section>
 
     </div>
   );
 };
 
-export default DropZone;
+export default DropXone;

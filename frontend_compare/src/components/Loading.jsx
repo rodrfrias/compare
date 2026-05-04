@@ -10,11 +10,8 @@ const Loading = () => {
       {/* Contenedor de Información: Ancho ajustado al padre */}
       <div className="w-full max-w-3xl space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-20 font-mono uppercase tracking-[0.2em] text-black/80">
-            Procesando documentos con IA
-          </h1>
-          <p className="text-[11px] font-mono text-black/50 truncate max-w-xs mx-auto">
-            Analizando: prov-cotiz-ene24.pdf
+          <p className=" font-sans text-[10px] text-black/50 truncate max-w-xs mx-auto">
+            Analizando Documentos, espere por favor...
           </p>
         </div>
 
@@ -40,11 +37,6 @@ const Loading = () => {
             ))}
           </div>
         </div>
-
-        {/* Footer del loader: Texto más visible y con pulso */}
-        <p className="text-center text-[10px] font-mono text-black/60 animate-pulse uppercase tracking-widest">
-          Normalizando precios y estructuras...
-        </p>
       </div>
     </div>
   )
