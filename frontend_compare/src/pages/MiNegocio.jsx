@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react';
+
 
 const MiNegocio = () => {
   const [tab, setTab] = useState('datos')
@@ -14,6 +15,83 @@ const MiNegocio = () => {
     'text-[9px] text-gray-400 mt-1 italic leading-tight'
 
   const requiredDot = <span className="text-blue-500 ml-0.5">*</span>
+
+
+  // Métodos para Dibujar Firma
+  const [isDrawing, setIsDrawing] = useState(false);
+  const canvasRef = useRef(null);
+  const contextRef = useRef(null);
+
+  // useEffect robusto para reactivar el canvas tras navegación o cambio de pestañas
+  useEffect(() => {
+    const setupCanvas = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      // Configuración de resolución (Retina/High DPI) para evitar pixelado
+      canvas.width = canvas.offsetWidth * 2; 
+      canvas.height = canvas.offsetHeight * 2;
+      canvas.style.width = `${canvas.offsetWidth}px`;
+      canvas.style.height = `${canvas.offsetHeight}px`;
+
+      const context = canvas.getContext("2d");
+      context.scale(2, 2);
+      
+      // --- ESTILO CALIGRAFÍA RE-ACTIVADO ---
+      context.lineCap = "round";  // Puntas redondeadas
+      context.lineJoin = "round"; // Uniones suaves en curvas
+      context.strokeStyle = "black";
+      context.lineWidth = 2;      // Grosor fino y elegante de 2px
+      // -------------------------
+      
+      contextRef.current = context;
+    };
+
+    // Delay de 50ms para asegurar que el DOM calculó bien el ancho/alto tras navegar
+    const timeoutId = setTimeout(setupCanvas, 50);
+
+    return () => clearTimeout(timeoutId);
+  }, [tab]); // Se dispara cada vez que el usuario vuelve a la pestaña de 'datos'
+
+  const startDrawing = ({ nativeEvent }) => {
+    // Protección por si el contexto no se ha inicializado
+    if (!contextRef.current) return;
+    
+    const { offsetX, offsetY } = nativeEvent;
+    contextRef.current.beginPath();
+    contextRef.current.moveTo(offsetX, offsetY);
+    setIsDrawing(true);
+  };
+
+  const draw = ({ nativeEvent }) => {
+    if (!isDrawing || !contextRef.current) return;
+    
+    const { offsetX, offsetY } = nativeEvent;
+    
+    contextRef.current.lineTo(offsetX, offsetY);
+    contextRef.current.stroke();
+    
+    // Suavizado caligráfico: iniciar un nuevo camino en el punto actual 
+    // para que el trazo sea más fluido al mover el mouse rápido
+    contextRef.current.beginPath();
+    contextRef.current.moveTo(offsetX, offsetY);
+  };
+
+  const stopDrawing = () => {
+    if (isDrawing && contextRef.current) {
+      contextRef.current.closePath();
+      setIsDrawing(false);
+    }
+  };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas || !contextRef.current) return;
+    
+    // Al usar scale(2,2), debemos limpiar el área multiplicada
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   return (
     <div className="flex-1 flex flex-col h-full border border-gray-300 bg-[#f9f9f7] overflow-hidden font-sans">
@@ -70,6 +148,50 @@ const MiNegocio = () => {
                     <label className={labelClass}>Teléfono {requiredDot}</label>
                     <input placeholder="Ej: 11 4567-8900" className={inputClass} />
                   </div>
+
+                  {/* Nuevo módulo de firma */}
+                  <div className="mt-2">
+                    <label className={labelClass}>Firma {requiredDot}</label>
+                    <div className="border border-gray-200 rounded-[3px] bg-white w-full h-[175px] relative overflow-hidden">
+                      <canvas 
+                        onMouseDown={startDrawing}
+                        onMouseMove={draw}
+                        onMouseUp={stopDrawing}
+                        onMouseLeave={stopDrawing}
+                        ref={canvasRef}
+                        className="w-full h-full cursor-crosshair"
+                      />
+                    </div>
+                    
+                    <div className="flex gap-2 mt-3">
+                      {/* Botón Lápiz: Ya configurado por defecto en el useEffect */}
+
+                      {/* Botón Borrar: Limpia el canvas */}
+                      <button 
+                        type="button"
+                        onClick={clearCanvas}
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-[3px] bg-gray-50 text-xs text-gray-700 hover:bg-gray-100 transition-colors active:bg-gray-200"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500">
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                        Borrar
+                      </button>
+
+                      <button 
+                        type="button"
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-[3px] bg-gray-50 text-xs text-gray-700 hover:bg-gray-100 transition-colors active:bg-gray-200"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500">
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                        Editar
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
