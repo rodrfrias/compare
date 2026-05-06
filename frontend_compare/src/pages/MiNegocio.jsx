@@ -106,7 +106,7 @@ const MiNegocio = () => {
               : 'border-transparent text-gray-400 hover:text-gray-600'
           }`}
         >
-          MOSTRAR DATOS
+          EDITAR DATOS
         </button>
         <button
           onClick={() => setTab('preview')}
@@ -116,7 +116,7 @@ const MiNegocio = () => {
               : 'border-transparent text-gray-400 hover:text-gray-600'
           }`}
         >
-          MOSTRAR VISTA PREVIA DEL PDF
+          VER VISTA PREVIA DE ORDEN
           <span className="text-[8px] bg-gray-200 text-gray-500 px-2 py-0.5 border border-gray-300 tracking-normal normal-case font-normal">
             orden de compra
           </span>
