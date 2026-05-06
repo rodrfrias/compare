@@ -15,6 +15,14 @@ const productosAplanados = productosRaw.flatMap(item =>
 const calcularSubtotal = (precioFinal, cantidad) =>
   (precioFinal * (cantidad || 0)).toFixed(2);
 
+const formatearPrecioARS = (precio) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 2
+  }).format(precio);
+};
+
 // ─── Inicializar cantidades ──────────────────────────────────────────────────
 const inicializarCantidades = () => {
   const init = {};
@@ -64,6 +72,8 @@ const TablaProductos = () => {
   );
 
   // ── Handlers ──────────────────────────────────────────────────────────────
+
+  // Esta función busca un producto específico dentro de una lista y modifica solo su propiedad iva
   const cambiarIva = (id, nuevoIva) =>
     setListaProductos(prev => prev.map(p =>
       p.id === id ? { ...p, iva: parseFloat(nuevoIva) || 0 } : p
@@ -72,6 +82,7 @@ const TablaProductos = () => {
   const cambiarCantidad = (id, valor) =>
     setCantidades(prev => ({ ...prev, [id]: Math.max(0, parseInt(valor) || 0) }));
 
+  // Esta función sirve para seleccionar o deseleccionar un ítem individualmente
   const toggleSeleccion = (id) =>
     setSeleccionados(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
@@ -135,7 +146,7 @@ const TablaProductos = () => {
                 <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">precio unit. neto</th>
                 <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">iva</th>
                 <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">precio final</th>
-                <th className='px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text center'>ahorro</th>
+                <th className='px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text center'>ahorro unit</th>
                 <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">cantidad</th>
                 <th className="px-2 py-1.5 uppercase text-gray-600 font-bold text-center">subtotal</th>
               </tr>
@@ -155,23 +166,23 @@ const TablaProductos = () => {
                     <td className="px-1 py-1 text-center">
                       <input type="checkbox" checked={seleccionado} readOnly className="w-3 h-3 accent-blue-600" />
                     </td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.codigo}</td>
-                    <td className="px-2 py-1 text-gray-800 font-medium border-r border-gray-100 whitespace-nowrap">{prod.nombre}</td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.marca}</td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.modelo}</td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.presentacion}</td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.proveedor_nombre}</td>
-                    <td className="px-2 py-1 text-gray-600 border-r border-gray-100">{prod.condicion_fiscal}</td>
-                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100">{prod.precio_unitario_neto.toFixed(2)}</td>
-                    <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.codigo}</td>
+                    <td className="px-2 py-1 uppercase text-gray-800 font-medium border-r border-gray-100 whitespace-nowrap">{prod.nombre}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.marca}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.modelo}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.presentacion}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.proveedor_nombre}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{prod.condicion_fiscal}</td>
+                    <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
+                    <td className="px-2 py-1 uppercase border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold">{prod.precio_final.toFixed(2)}</td>
+                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold">{formatearPrecioARS(prod.precio_final)}</td>
                     <td className='px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold'></td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right font-bold text-gray-900">${subtotal}</td>
+                    <td className="px-2 py-1 text-right font-bold text-gray-900">{ formatearPrecioARS(subtotal)}</td>
                   </tr>
                 );
               }) : (
