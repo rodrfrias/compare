@@ -1,7 +1,7 @@
 # api/v1/routes/urls.py
 from django.urls import path
-from api.v1.views.document_views import SanitizePDFView
+from api.v1.views.document_views import PdfExtraccionDatosView
 
 urlpatterns = [
-    path('upload-pdf/', SanitizePDFView.as_view(), name='upload-pdf'),
+    path('upload-pdf/', PdfExtraccionDatosView.as_view(), name='upload-pdf'),
 ]
