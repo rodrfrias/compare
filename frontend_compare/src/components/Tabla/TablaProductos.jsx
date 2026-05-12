@@ -109,7 +109,7 @@ const TablaProductos = () => {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className='w-full h-full flex flex-col bg-[#f5f3ee] p-1'>
+    <div className='w-full h-full flex flex-col bg-[#f3f4f6] p-1'>
 
       {/* Buscador */}
       <div className="mb-1">
