@@ -41,7 +41,7 @@ const MiNegocio = () => {
       context.lineCap = "round";  // Puntas redondeadas
       context.lineJoin = "round"; // Uniones suaves en curvas
       context.strokeStyle = "black";
-      context.lineWidth = 2;      // Grosor fino y elegante de 2px
+      context.lineWidth = 1;      // Grosor fino y elegante de 2px
       // -------------------------
       
       contextRef.current = context;

@@ -1,5 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import productosRaw from '../../utilities/productos.js';
+import ModalPedido from '../ModalPedido.jsx';
+
+
 
 // ─── Aplanar datos ───────────────────────────────────────────────────────────
 const productosAplanados = productosRaw.flatMap(item =>
@@ -65,6 +68,8 @@ const TablaProductos = () => {
   const [filtro, setFiltro]                 = useState("");
   const [seleccionados, setSeleccionados]   = useState([]);
   const [cantidades, setCantidades]         = useState(inicializarCantidades);
+  // 1. Definimos el estado para controlar la visibilidad
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const productosFiltrados = useMemo(
     () => filtrarProductos(listaProductos, filtro),
@@ -98,14 +103,26 @@ const TablaProductos = () => {
     }
   };
 
-  const generarPedido = () => {
-    const pedido = seleccionados
-      .map(id => ({ ...listaProductos.find(p => p.id === id), cantidad: cantidades[id] }))
-      .filter(p => p.cantidad > 0);
+  // ___MODAL_____________________________________________________________________
 
-    console.log("Pedido generado:", pedido);
-    alert(`Pedido generado con ${pedido.length} productos.`);
-  };
+  // 2. Funciona para abrir el Modal
+  const handleOpenModal = () => {
+      setIsModalOpen(true);
+    }
+
+  // 3. Funcion para cerrar el Modal
+  const handleCloseModal = () => {
+      setIsModalOpen(false);
+    }
+
+  const headerStyles = `
+  px-2 py-2 
+  text-[9px] font-bold uppercase tracking-wider text-[#555]
+  bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
+  border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
+  text-center
+`;
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
@@ -128,7 +145,7 @@ const TablaProductos = () => {
           <table className="w-full border-collapse text-left font-sans text-[9px]">
             <thead>
               <tr className="bg-[#f8f9fa] border-b border-gray-300 sticky top-0 z-20">
-                <th className="px-1 py-1.5 text-center w-8">
+                <th className={headerStyles}>
                   <input
                     type="checkbox"
                     onChange={toggleTodos}
@@ -136,19 +153,19 @@ const TablaProductos = () => {
                     className="w-3 h-3 accent-blue-600"
                   />
                 </th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">codigo</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">nombre</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">marca</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">modelo</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">presentacion</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">proveedor</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">condicion proveedor</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">precio unit. neto</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">iva</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">precio final</th>
-                <th className='px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text center'>ahorro unit</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold border-r border-gray-200 text-center">cantidad</th>
-                <th className="px-2 py-1.5 uppercase text-gray-600 font-bold text-center">subtotal</th>
+                <th className={headerStyles}>codigo</th>
+                <th className={headerStyles}>nombre</th>
+                <th className={headerStyles}>marca</th>
+                <th className={headerStyles}>modelo</th>
+                <th className={headerStyles}>presentacion</th>
+                <th className={headerStyles}>proveedor</th>
+                <th className={headerStyles}>condicion proveedor</th>
+                <th className={headerStyles}>precio unit. neto</th>
+                <th className={headerStyles}>iva</th>
+                <th className={headerStyles}>precio final</th>
+                <th className={headerStyles}>ahorro unitario</th>
+                <th className={headerStyles}>cantidad</th>
+                <th className={headerStyles}>subtotal</th>
               </tr>
             </thead>
             <tbody>
@@ -199,11 +216,29 @@ const TablaProductos = () => {
 
       {/* Botón */}
       <button
-        onClick={generarPedido}
-        className="w-full mt-1 h-7 bg-[#e1e1e1] border border-gray-400 text-gray-700 font-sans text-[10px] uppercase tracking-wider shadow-sm hover:border-blue-400 hover:bg-[#e8e8e8] active:bg-[#d4d4d4] transition-all duration-200 outline-none"
-      >
-        Generar Pedido
+          onClick={handleOpenModal}
+          className="
+            w-full mt-1 h-8 
+            /* Tipografía y Texto */
+            text-[10px] font-bold uppercase tracking-[0.12em] text-[#444]
+            
+            /* Fondo y Gradiente (Efecto JavaFX) */
+            bg-gradient-to-b from-[#ffffff] to-[#f2f2f2] 
+            hover:from-[#f9f9f9] hover:to-[#e8e8e8]
+            
+            /* Bordes y Profundidad */
+            border-[0.5px] border-[#c0bfb8]
+            shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_2px_rgba(0,0,0,0.05)]
+            
+            /* Estados y Transición */
+            transition-all duration-200 
+            active:scale-[0.98] active:from-[#ececec] active:to-[#dadada]
+            outline-none cursor-pointer
+          "
+        >
+          Generar Pedido
       </button>
+      <ModalPedido isOpen = {isModalOpen} onClose={handleCloseModal}></ModalPedido>
 
     </div>
   );
