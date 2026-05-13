@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import productosRaw from '../../utilities/productos.js';
-import ModalPedido from '../ModalPedido.jsx';
+import ModalPedido from '../Pedido/ModalPedido.jsx';
 
 
 
@@ -236,7 +236,7 @@ const TablaProductos = () => {
             outline-none cursor-pointer
           "
         >
-          Generar Pedido
+          confirmar selección
       </button>
       <ModalPedido isOpen = {isModalOpen} onClose={handleCloseModal}></ModalPedido>
 

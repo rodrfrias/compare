@@ -28,19 +28,21 @@ const ModalPedido = ({ isOpen, onClose }) => {
             <p className="text-[42px] font-medium text-[#1a1a1a] leading-none tracking-tight">
               $ 15.200,60
             </p>
+            <p className="text-[11px] text-gray-400 text-center mt-2">VS comprarle TODO al proveedor más caro.</p>
           </div>
 
           {/* Métricas secundarias - mb-6 en lugar de mb-10 */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="border-[0.5px] border-[#e2e1da] px-6 py-4 bg-[#f9f8f4]">
+            <div className="border-[0.5px] border-[#e2e1da] px-6 py-4 bg-[#f9f8f4] text-center">
               <p className="text-[9px] font-bold text-[#999] uppercase tracking-[0.12em] mb-1">
                 Subtotal
               </p>
               <p className="text-[20px] font-medium text-[#333]">
                 $ 120.500,00
               </p>
+              <p className="text-[12px] text-gray-400 text-center mt-1">No incluye envío ni impuestos provinciales.</p>
             </div>
-            <div className="border-[0.5px] border-[#e2e1da] px-6 py-4 bg-[#f9f8f4]">
+            <div className="border-[0.5px] border-[#e2e1da] px-6 py-4 bg-[#f9f8f4] text-center">
               <p className="text-[9px] font-bold text-[#999] uppercase tracking-[0.12em] mb-1">
                 Proveedores
               </p>
