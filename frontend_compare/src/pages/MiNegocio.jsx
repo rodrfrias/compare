@@ -4,15 +4,20 @@ import React, { useRef, useEffect, useState } from 'react';
 const MiNegocio = () => {
   const [tab, setTab] = useState('datos')
 
-  // Clases unificadas para estética JavaFX / Escritorio profesional
+  // UI / UX Refactorizado para coincidir con la tabla de datos (image_2c3db8.png)
   const inputClass =
-    'w-full h-8 border border-gray-300 bg-white px-3 text-[11px] text-gray-800 placeholder:text-gray-300 focus:outline-none focus:border-blue-400 transition-all shadow-sm'
+    'w-full h-7 border border-gray-300 bg-white px-2 text-[11px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 transition-all shadow-sm';
 
   const labelClass =
-    'block text-[10px] font-sans font-bold uppercase tracking-wider text-[#7a8a99] mb-1'
-
+    'block text-[10px] font-bold uppercase tracking-tight text-gray-500 mb-1';
+    
   const subLabelClass = 
-    'text-[9px] text-gray-400 mt-1 italic leading-tight'
+    'text-[9px] text-gray-400 mt-0.5 italic leading-tight';
+
+  // Botón estilo "Generar Pedido" de la tabla
+  const mainButtonClass = 
+    'h-8 px-10  text-[10px] font-bold uppercase tracking-[0.12em] text-[#444] hover:from-[#f9f9f9] hover:to-[#e8e8e8] border-[0.5px] border-[#c0bfb8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_2px_rgba(0,0,0,0.05)] transition-all duration-200  active:scale-[0.98] active:from-[#ececec] active:to-[#dadada] outline-none cursor-pointer';
+
 
   const requiredDot = <span className="text-blue-500 ml-0.5">*</span>
 
@@ -214,7 +219,7 @@ const MiNegocio = () => {
                   </div>
                   <div>
                     <label className={labelClass}>Condición frente al IVA {requiredDot}</label>
-                    <select className={`${inputClass} appearance-none cursor-pointer bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23aaa%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E')] bg-[length:12px] bg-[right_10px_center] bg-no-repeat`}>
+                    <select className={inputClass}>
                       <option value="">Seleccioná tu condición</option>
                       <option>Responsable Inscripto</option>
                       <option>Monotributista</option>
@@ -241,7 +246,7 @@ const MiNegocio = () => {
 
                   <div>
                     <label className={labelClass}>Provincia {requiredDot}</label>
-                    <select className={`${inputClass} appearance-none cursor-pointer bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23aaa%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E')] bg-[length:12px] bg-[right_10px_center] bg-no-repeat`}>
+                    <select className={`${inputClass} cursor-pointer`}>
                       <option value="">Seleccioná una provincia</option>
                       {['Buenos Aires','CABA','Catamarca','Chaco','Chubut','Córdoba','Corrientes',
                       'Entre Ríos','Formosa','Jujuy','La Pampa','La Rioja','Mendoza','Misiones',
@@ -259,7 +264,7 @@ const MiNegocio = () => {
             <p className="text-[10px] text-gray-400">
               <span className="text-blue-500 font-bold">*</span> Campos obligatorios
             </p>
-            <button className="h-8 px-10 bg-[#e1e1e1] border border-gray-400 text-gray-700 font-sans text-[10px] uppercase tracking-wider shadow-sm hover:border-blue-400 hover:bg-[#e8e8e8] active:bg-[#d4d4d4] transition-all duration-200 outline-none">
+            <button className={mainButtonClass}>
               Guardar cambios
             </button>
           </div>
