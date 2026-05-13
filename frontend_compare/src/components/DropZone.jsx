@@ -13,25 +13,11 @@ const DropXone = () => {
     { id: 3, nombre: "Factura_A_001.pdf", progreso: 100, tipo: "PDF" }
   ]);
 
-  // Componente de Botón unificado para toda la App
-  const BotonJavaFX = ({ children, onClick, className = "", variant = "gray" }) => {
-    const variants = {
-      gray: "bg-[#e1e1e1] border-gray-400 text-gray-700 hover:bg-[#e8e8e8] active:bg-[#d4d4d4]",
-      dark: "bg-[#222] border-black text-white hover:bg-black active:bg-gray-900"
-    };
+  // Botón estilo "Generar Pedido" de la tabla
+  const mainButtonClass = 'h-8 px-10  text-[10px] font-bold uppercase tracking-[0.12em] text-[#444] bg-gradient-to-b from-[#ffffff] to-[#f2f2f2] hover:from-[#f9f9f9] hover:to-[#e8e8e8] border-[0.5px] border-[#c0bfb8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_2px_rgba(0,0,0,0.05)] transition-all duration-200  active:scale-[0.98] active:from-[#ececec] active:to-[#dadada] outline-none cursor-pointer';
     
-    return (
-      <button 
-        onClick={onClick}
-        className={`h-7 px-4 border font-sans text-[10px] uppercase tracking-wider shadow-sm transition-all duration-200 outline-none hover:border-blue-400 ${variants[variant]} ${className}`}
-      >
-        {children}
-      </button>
-    );
-  };
-
   return (
-    <div className='w-full h-full flex flex-col bg-[#f5f3ee] p-4 gap-6 font-sans'>
+    <div className='w-full h-full flex flex-col bg-[#f9f9f7] p-4 gap-6 font-sans'>
       
       {/* SECCIÓN: CARGA DE DOCUMENTOS */}
       <section className="flex flex-col gap-3">
@@ -127,9 +113,9 @@ const DropXone = () => {
         </div>
         
         <div className="flex gap-2">
-          <BotonJavaFX onClick={() => console.log("Limpiar...")}>
-            Confirmar
-          </BotonJavaFX>
+          <button className={mainButtonClass}>
+              confirmar
+            </button>
         </div>
       </section>
 
