@@ -1,5 +1,5 @@
 import React from 'react';
-import TablaPedido from './TablaPedido';
+import TablaOrdenCompra from "./TablaOrdenCompra"
 
 const ModalPedido = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -8,7 +8,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
   
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[1px]">
-      <div className="bg-[#ffffff] border-[0.5px] border-[#c0bfb8] w-full max-w-[950px] min-h-[600px] font-sans shadow-2xl">
+      <div className="bg-[#ffffff] border-[0.5px] border-[#c0bfb8] w-full max-w-[950px] h-auto font-sans shadow-2xl">
         
         {/* Encabezado - Altura mínima */}
         <div className="px-7 py-1.5 border-b-[0.5px] border-[#e2e1da] flex justify-between items-center bg-[#f5f4f0]">
@@ -63,11 +63,11 @@ const ModalPedido = ({ isOpen, onClose }) => {
             Impuestos estimativos sujetos a facturación final.
           </p>
 
-          <div className='flex items-start min-h-80 border border-black/10'>
-            <TablaPedido></TablaPedido>
+          <div className='flex items-start min-h-50 border border-black/10'>
+            <TablaOrdenCompra></TablaOrdenCompra>
           </div>
           <div className='flex items-center justify-end mt-2'>
-              <button onClick={onClose} className= {mainButtonClass}> cancelar</button>
+              <button onClick={onClose} className= {mainButtonClass}> Cerrar</button>
           </div>
   
         </div>
