@@ -1,5 +1,6 @@
 import React from 'react'
 
+// NO USADO
 const TarjetaTotal = () => {
 return (
     <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-[340px] border border-black/10">

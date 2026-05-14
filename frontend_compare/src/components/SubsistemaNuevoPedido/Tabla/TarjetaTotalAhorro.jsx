@@ -1,5 +1,5 @@
 import React from 'react'
-
+// NO USADO
 const TarjetaTotalAhorro = () => {
     return (
     <div className="bg-white rounded-xs px-5 py-1.5 flex-1 max-w-85 border border-black/10">

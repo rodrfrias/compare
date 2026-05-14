@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import productosRaw from '../../utilities/productos.js';
+import productosRaw from '../../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
 
 

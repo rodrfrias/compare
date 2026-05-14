@@ -1,7 +1,7 @@
 import React from 'react'
-import TablaProductos from '../components/Tabla/TablaProductos.jsx'
-import Loading from "../components/Loading.jsx"
-import DropZone from "../components/DropZone.jsx"
+import TablaProductos from '../components/SubsistemaNuevoPedido/Tabla/TablaProductos.jsx'
+import Loading from "../components/SubsistemaNuevoPedido/Loading.jsx"
+import DropZone from "../components/SubsistemaNuevoPedido/DropZone.jsx"
 
 const NuevoPedido = () => {
   return (
