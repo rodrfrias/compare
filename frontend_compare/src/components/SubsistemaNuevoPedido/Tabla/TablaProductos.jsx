@@ -195,7 +195,7 @@ const TablaProductos = () => {
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
                     <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold">{formatearPrecioARS(prod.precio_final)}</td>
-                    <td className='px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold'></td>
+                    <td className='text-center'>{prod.ahorro && prod.ahorro > 0 ?(<span className='px-2 py-1 uppercase text-[10px] text-blue-600 font-bold border-r border-gray-100'>{formatearPrecioARS(prod.ahorro)}</span>):(<span className='px-2 py-1 uppercase text-gray-600 border-r border-gray-100'>no aplica</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>

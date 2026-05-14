@@ -1,3 +1,5 @@
+/* Nosotros agregamos aqui la propiedad de ahorro para programar el frontend*/
+
 const productosRaw = [
   {
     proveedor: {
@@ -22,7 +24,8 @@ const productosRaw = [
         precio_unitario_neto: 125000.00,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 151250.00
+        precio_final: 151250.00,
+        ahorro: 2432
       },
       {
         id: 7,
@@ -35,7 +38,8 @@ const productosRaw = [
         precio_unitario_neto: 42000.00,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 50820.00
+        precio_final: 50820.00,
+        ahorro: 1234
       }
     ]
   },
@@ -62,7 +66,8 @@ const productosRaw = [
         precio_unitario_neto: 95000.50,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 114950.60
+        precio_final: 114950.60,
+        ahorro: 3432
       },
       {
         id: 8,
@@ -75,7 +80,8 @@ const productosRaw = [
         precio_unitario_neto: 105000.00,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 127050.00
+        precio_final: 127050.00,
+        ahorro: 886
       }
     ]
   },
@@ -102,7 +108,8 @@ const productosRaw = [
         precio_unitario_neto: 12396.69,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 15000.00
+        precio_final: 15000.00,
+        ahorro: 0
       },
       {
         id: 4,
@@ -115,7 +122,8 @@ const productosRaw = [
         precio_unitario_neto: 148760.33,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 180000.00
+        precio_final: 180000.00,
+        ahorro: 0
       },
       {
         id: 9,
@@ -128,7 +136,8 @@ const productosRaw = [
         precio_unitario_neto: 8500.00,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 10285.00
+        precio_final: 10285.00,
+        ahorro: 0
       },
       {
         id: 10,
@@ -141,7 +150,8 @@ const productosRaw = [
         precio_unitario_neto: 4500.00,
         iva_Incluido: false,
         alicuota_detectada: 21.0,
-        precio_final: 5445.00
+        precio_final: 5445.00,
+        ahorro: 0
       }
     ]
   },
@@ -168,7 +178,8 @@ const productosRaw = [
         precio_unitario_neto: 4500.00,
         iva_Incluido: false,
         alicuota_detectada: 0.0,
-        precio_final: 4500.00
+        precio_final: 4500.00,
+        ahorro: 222
       },
       {
         id: 11,
@@ -181,7 +192,8 @@ const productosRaw = [
         precio_unitario_neto: 250000.00,
         iva_Incluido: false,
         alicuota_detectada: 0.0,
-        precio_final: 250000.00
+        precio_final: 250000.00,
+        ahorro: 333
       }
     ]
   },
@@ -208,7 +220,8 @@ const productosRaw = [
         precio_unitario_neto: 3200.00,
         iva_Incluido: false,
         alicuota_detectada: 0.0,
-        precio_final: 3200.00
+        precio_final: 3200.00,
+        ahorro: 4324
       },
       {
         id: 12,
@@ -221,7 +234,8 @@ const productosRaw = [
         precio_unitario_neto: 7500.00,
         iva_Incluido: false,
         alicuota_detectada: 0.0,
-        precio_final: 7500.00
+        precio_final: 7500.00,
+        ahorro: 0
       }
     ]
   }
