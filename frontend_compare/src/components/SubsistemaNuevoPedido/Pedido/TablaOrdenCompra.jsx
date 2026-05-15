@@ -2,6 +2,7 @@ import React from 'react';
 import ordenesCompra from '../../../utilities/ordenes';
 import { LuSendHorizontal } from "react-icons/lu";
 import { GrDocument } from "react-icons/gr";
+import { SiGmail } from "react-icons/si";
 
 const TablaOrdenCompra = () => {
   const headerStyles = `
@@ -58,7 +59,8 @@ const TablaOrdenCompra = () => {
                     <td className="px-2 py-2 text-center">
                       <div className='flex items-center justify-center gap-2'>
                         <button title="Ver Orden" className='cursor-pointer'> <GrDocument size={12}></GrDocument>  </button>
-                        <button title="Enviar Orden" className='cursor-pointer'><LuSendHorizontal size={12} /></button>
+                        <button title="Redactar un Mensaje" className='cursor-pointer'> <SiGmail size={12}></SiGmail> </button>
+                        <button title="Enviar Orden de Compra" className='cursor-pointer'><LuSendHorizontal size={12} /></button>
                       </div>
                     </td>
                   </tr>

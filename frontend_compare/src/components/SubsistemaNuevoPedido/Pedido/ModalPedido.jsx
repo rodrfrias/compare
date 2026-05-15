@@ -1,5 +1,6 @@
 import React from 'react';
-import TablaOrdenCompra from "./TablaOrdenCompra"
+import TablaOrdenCompra from "./TablaOrdenCompra";
+
 
 const ModalPedido = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -26,12 +27,12 @@ const ModalPedido = ({ isOpen, onClose }) => {
               Ahorro Total
             </p>
             <div className="flex items-baseline gap-2">
-              <p className="text-[35px] font-medium text-[#1a1a1a] leading-none tracking-tight">
+              <p className="text-[35px] font-bold text-blue-900 leading-none tracking-tight">
                 $ 15.200,60
               </p>
               <span className="text-[12px] font-bold text-[#888] tracking-wider">ARS</span>
             </div>
-            <p className="text-[10px] text-gray-400 text-center mt-1">VS proveedor más caro.</p>
+            <p className="text-[11px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
           </div>
 
           {/* Métricas secundarias - Altura reducida en py-2 */}
@@ -41,18 +42,19 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 Subtotal
               </p>
               <div className="flex items-baseline justify-center gap-1.5">
-                <p className="text-[20px] font-medium text-black">
+                <p className="text-[20px] font-bold text-black">
                   $ 120.500,00
                 </p>
                 <span className="text-[9px] font-bold text-[#aaa]">ARS</span>
               </div>
+              <p className="text-[12px] text-gray-400 text-center mt-0.5">No incluye envío ni impuestos provinciales.</p>
             </div>
             
             <div className="border-[0.5px] border-[#e2e1da] px-4 py-2 bg-[#f9f8f4] flex flex-col justify-center text-center">
               <p className="text-[9px] font-bold text-[#999] uppercase tracking-[0.12em]">
                 Proveedores
               </p>
-              <p className="text-[20px] font-medium  text-black">
+              <p className="text-[20px] font-bold  text-black">
                 3 pedidos
               </p>
             </div>
