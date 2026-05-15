@@ -4,7 +4,7 @@ const vistaPDF = () => {
 
   return (
     <div className="flex-1 overflow-y-auto p-8 bg-gray-200/50 flex flex-col items-center">
-      <div className="w-[794px] min-h-[1123px] bg-white border border-gray-400 p-12 shadow-2xl mb-10 font-sans text-[11px] text-gray-900">
+      <div className="w-[794px] min-h-[1123px] bg-white border border-gray-400 p-12  mb-10 font-sans text-[11px] text-gray-900">
 
         {/* Encabezado */}
         <div className="flex items-start justify-between mb-2">
