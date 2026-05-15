@@ -1,5 +1,7 @@
 import React from 'react';
 import ordenesCompra from '../../../utilities/ordenes';
+import { LuSendHorizontal } from "react-icons/lu";
+import { GrDocument } from "react-icons/gr";
 
 const TablaOrdenCompra = () => {
   const headerStyles = `
@@ -54,7 +56,10 @@ const TablaOrdenCompra = () => {
         
                     </td>
                     <td className="px-2 py-2 text-center">
-                      <button className="text-blue-600 hover:underline">aquí iran acciones</button>
+                      <div className='flex items-center justify-center gap-2'>
+                        <button title="Ver Orden" className='cursor-pointer'> <GrDocument size={12}></GrDocument>  </button>
+                        <button title="Enviar Orden" className='cursor-pointer'><LuSendHorizontal size={12} /></button>
+                      </div>
                     </td>
                   </tr>
                 ))
