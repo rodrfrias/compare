@@ -42,7 +42,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 Subtotal
               </p>
               <div className="flex items-baseline justify-center gap-1.5">
-                <p className="text-[20px] font-bold text-black">
+                <p className="text-[20px] font-bold text-gray-800">
                   $ 120.500,00
                 </p>
                 <span className="text-[9px] font-bold text-[#aaa]">ARS</span>
@@ -54,7 +54,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
               <p className="text-[9px] font-bold text-[#999] uppercase tracking-[0.12em]">
                 Proveedores
               </p>
-              <p className="text-[20px] font-bold  text-black">
+              <p className="text-[20px] font-bold  text-gray-800">
                 3 pedidos
               </p>
             </div>

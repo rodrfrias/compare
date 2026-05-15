@@ -160,7 +160,7 @@ const TablaProductos = () => {
                 <th className={headerStyles}>presentacion</th>
                 <th className={headerStyles}>proveedor</th>
                 <th className={headerStyles}>condicion proveedor</th>
-                <th className={headerStyles}>precio unit. neto</th>
+                <th className={headerStyles}>precio unitario neto</th>
                 <th className={headerStyles}>iva</th>
                 <th className={headerStyles}>precio final</th>
                 <th className={headerStyles}>ahorro unitario</th>

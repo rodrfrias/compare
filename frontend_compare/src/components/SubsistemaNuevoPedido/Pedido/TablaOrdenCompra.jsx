@@ -40,7 +40,7 @@ const TablaOrdenCompra = () => {
                     key={orden.id || index} 
                     className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'} border-b border-gray-100 hover:bg-blue-50 transition-colors`}
                   >
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100">{orden.n_orden}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{orden.n_orden}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">
                       {orden.fecha_emision}
                     </td>
@@ -51,16 +51,16 @@ const TablaOrdenCompra = () => {
                       {/* Asumiendo que quieres formato moneda */}
                       {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                     </td>
-                    <td className="px-2 py-2 uppercase text-blue-600 border-r border-gray-100 text-center font-bold">
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center font-bold">
 
                         {orden.estado}
         
                     </td>
                     <td className="px-2 py-2 text-center">
                       <div className='flex items-center justify-center gap-2'>
-                        <button title="Ver Orden" className='cursor-pointer'> <GrDocument size={12}></GrDocument>  </button>
-                        <button title="Redactar un Mensaje" className='cursor-pointer'> <SiGmail size={12}></SiGmail> </button>
-                        <button title="Enviar Orden de Compra" className='cursor-pointer'><LuSendHorizontal size={12} /></button>
+                        <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <GrDocument size={12}></GrDocument>  </button>
+                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <SiGmail size={12}></SiGmail> </button>
+                        <button title="Enviar Orden de Compra" className='cursor-pointer text-gray-600 hover:scale-110'><LuSendHorizontal size={12} /></button>
                       </div>
                     </td>
                   </tr>

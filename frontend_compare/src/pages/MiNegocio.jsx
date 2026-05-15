@@ -63,9 +63,15 @@ const MiNegocio = () => {
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#b0bec5] mb-2">Datos del responsable</p>
                 <div className="h-px bg-gray-200 w-full mb-6" />
                 <div className="flex flex-col gap-5">
-                  <div>
-                    <label className={labelClass}>Nombre y apellido {requiredDot}</label>
-                    <input placeholder="Ej: Laura Martínez" className={inputClass} />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className={labelClass}>Nombre {requiredDot}</label>
+                      <input placeholder="Ej: Juan Ignacio" className={inputClass} />
+                    </div>
+                    <div>
+                      <label className={labelClass}>Apellido {requiredDot}</label>
+                      <input placeholder="Ej: Pellegrini" className={inputClass} />
+                    </div>
                   </div>
                   <div>
                     <label className={labelClass}>Email {requiredDot}</label>
