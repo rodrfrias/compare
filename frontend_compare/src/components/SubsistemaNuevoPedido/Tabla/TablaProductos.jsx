@@ -1,18 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import productosRaw from '../../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
+import obtenerMejoresPrecios from '../../../utilities/ModuloComparacion/comp.js';
 
 
 
-// ─── Aplanar datos ───────────────────────────────────────────────────────────
-const productosAplanados = productosRaw.flatMap(item =>
-  item.producto.map(p => ({
-    ...p,
-    proveedor_nombre: item.proveedor.proveedor_nombre,
-    condicion_fiscal: item.proveedor.condicion_fiscal,
-    iva: p.alicuota_detectada ?? 21,
-  }))
-);
+//_____Buscamos los productos con mejores precios (Provisional)_________________
+const productosMejoresPrecios = obtenerMejoresPrecios(productosRaw);
 
 // ─── Calcular subtotal ───────────────────────────────────────────────────────
 const calcularSubtotal = (precioFinal, cantidad) =>
@@ -29,7 +23,7 @@ const formatearPrecioARS = (precio) => {
 // ─── Inicializar cantidades ──────────────────────────────────────────────────
 const inicializarCantidades = () => {
   const init = {};
-  productosAplanados.forEach(p => init[p.id] = 0);
+  productosMejoresPrecios.forEach(p => init[p.id] = 0);
   return init;
 };
 
@@ -64,7 +58,7 @@ const InputNumerico = ({ value, onChange }) => (
 
 // ────────────────────────────────────────────────────────────────────────────
 const TablaProductos = () => {
-  const [listaProductos, setListaProductos] = useState(ordenarPorCategoria(productosAplanados));
+  const [listaProductos, setListaProductos] = useState(ordenarPorCategoria(productosMejoresPrecios));
   const [filtro, setFiltro]                 = useState("");
   const [seleccionados, setSeleccionados]   = useState([]);
   const [cantidades, setCantidades]         = useState(inicializarCantidades);
@@ -195,7 +189,7 @@ const TablaProductos = () => {
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
                     <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold">{formatearPrecioARS(prod.precio_final)}</td>
-                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.ahorro && prod.ahorro > 0 ?(<span className='uppercase text-[10px] text-blue-900 font-bold'>{formatearPrecioARS(prod.ahorro)}</span>):(<span className='uppercase text-gray-600 '>no aplica</span>)}</td>
+                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-blue-900 font-bold'>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 '>no aplica</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
