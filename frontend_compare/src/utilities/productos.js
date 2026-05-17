@@ -8,7 +8,7 @@ proveedor: {
     CUIT: "30-XXXXXXXX-X",
     dirección_email: "ventas@pinturascentro.com.ar",
     teléfono: "0800-XXX-PINTA",
-    condicion_fiscal: "Monotributista",
+    condicion_fiscal: "Responsable Inscripto",
     dirección: "Av. Corrientes 1234",
     localidad: "CABA",
     codigo_postal: "1043"
@@ -22,10 +22,10 @@ proveedor: {
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
         presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 0,
+        precio_unitario_neto: 1000.0,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 1500,
+        precio_final: 1210.0,
     
     }
     ]
@@ -53,7 +53,7 @@ proveedor: {
         precio_unitario_neto: 0,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 1650.0,
+        precio_final: 1180.0,
     },
     {
         id: 3,

@@ -126,10 +126,7 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
                         // Paso A: ¿El precio nuevo es el más BAJO de todos? Si es así, actualizamos el proveedor ganador
                         if (precioNuevo < precioMasBajoActual) {
                             mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
-                            // No trabajamos con los precios finales
-                            mejoresProductos[claveUnica].precio_final_mas_bajo = prod.precio_final,
-                            mejoresProductos[claveUnica].precio_final_mas_alto =  prod.precio_final,
-
+    
                             mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
                             mejoresProductos[claveUnica].producto = { ...prod };
 
@@ -144,11 +141,40 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
                         // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
                         const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
                         const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        
                         mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                        // Actualizamos
+                        mejoresProductos[claveUnica].precio_final_mas_bajo = prod.precio_final;
+                        mejoresProductos[claveUnica].precio_final_mas_alto =  prod.precio_final;
 
                     }
                     // RI VS MO
-                    else{
+                    if(infoProveedor.condicion_fiscal == condicionMO){
+                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        const precioNuevo = prod.precio_final;
+
+                        if (precioNuevo < precioMasBajoActual) {
+                            mejoresProductos[claveUnica].precio_final_mas_bajo = precioNuevo,
+
+                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                            mejoresProductos[claveUnica].producto = { ...prod };
+
+                        }
+
+                        if (precioNuevo > precioMasAltoActual) {
+                            mejoresProductos[claveUnica].precio_final_mas_alto = precioNuevo;
+                        }
+
+                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const extremoMaximo = mejoresProductos[claveUnica].precio_final_mas_bajo;
+
+                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                        // actualizamos
+                        mejoresProductos[claveUnica].precio_neto_mas_bajo = prod.precio_unitario_neto;
+                        mejoresProductos[claveUnica].precio_neto_mas_alto = prod.precio_unitario_neto;
                         
                     }
 
@@ -168,10 +194,7 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
 
                         if(precioNuevo < precioMasBajoActual){
                             mejoresProductos[claveUnica].precio_final_mas_bajo = precioNuevo;
-                            // No trabajamos con los precios netos
-                            mejoresProductos[claveUnica].precio_neto_mas_bajo = prod.precio_unitario_neto;
-                            mejoresProductos[claveUnica].precio_neto_mas_alto = prod.precio_unitario_neto;
-
+                
                             mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
                             mejoresProductos[claveUnica].producto = { ...prod };
                         }
@@ -186,6 +209,10 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
                         const extremoMaximo = mejoresProductos[claveUnica].precio_final_mas_alto;
                         
                         mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                        // Actualizamos
+                        mejoresProductos[claveUnica].precio_neto_mas_bajo = prod.precio_unitario_neto;
+                        mejoresProductos[claveUnica].precio_neto_mas_alto = prod.precio_unitario_neto;
 
                     }
                 }
