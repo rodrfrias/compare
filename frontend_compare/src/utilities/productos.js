@@ -53,7 +53,7 @@ proveedor: {
         precio_unitario_neto: 0,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 1180.0,
+        precio_final: 995.0,
     },
     {
         id: 3,
