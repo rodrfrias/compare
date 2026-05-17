@@ -73,7 +73,9 @@ proveedor: {
 ];
 
 
-const obtenerMejoresPrecios = (listaProveedores) => {
+const comparacionPreciosUsuarioRI = (listaProveedores) => {
+    const condicionRI = "Responsable Inscripto";
+    const condicionMO = "Monotributista";
     // ETAPA 1: Crear el diccionario vacío
     const mejoresProductos = {};
 
@@ -93,36 +95,136 @@ const obtenerMejoresPrecios = (listaProveedores) => {
             if (!yaExisteElProducto) {
                 // Si es la primera vez que lo vemos, este único precio es tanto el más bajo como el más alto por ahora.
                 mejoresProductos[claveUnica] = {
+                    // Precios Netos para Responsables Inscriptos
                     precio_neto_mas_bajo: prod.precio_unitario_neto,
-                    precio_neto_mas_alto: prod.precio_unitario_neto, // Lo usamos solo para controlar los extremos
-                    diferencia: 0, // Al haber un solo proveedor, la diferencia lógicamente es 0
+                    precio_neto_mas_alto: prod.precio_unitario_neto, 
+                    // Precios Finales para Monotrobutistas
+                    precio_final_mas_bajo: prod.precio_final,
+                    precio_final_mas_alto: prod.precio_final,
+                    // Condicion del Proveedor para compara precios
+                    condicion_fiscal_proveedor: infoProveedor.condicion_fiscal, // Tnemos a mano la condicion Fiscal
+                    // Un valor que tendrá las diferencia entre los precios (inicialmente 0 al haber un solo proveedor).
+                    diferencia: 0, 
+                    // DATOS ABSOLUTOS DEL PROVEEDOR Y PRODUCTO
                     proveedor: { ...infoProveedor },
                     producto: { ...prod }
                 };
             } else {
-                // ETAPA 6: Si el producto YA existía, rescatamos los extremos actuales y el precio nuevo
-                const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
-                const precioNuevo = prod.precio_unitario_neto;
 
-                // Paso A: ¿El precio nuevo es el más BAJO de todos? Si es así, actualizamos el proveedor ganador
-                if (precioNuevo < precioMasBajoActual) {
-                    mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
-                    mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
-                    mejoresProductos[claveUnica].producto = { ...prod };
+                // Y el 1er Producto tiene CONDICION RI.
+
+                if(mejoresProductos[claveUnica].condicion_fiscal_proveedor == condicionRI){
+                    // Responsanle Inscripto VS Responsanle Inscripto.
+                    if(infoProveedor.condicion_fiscal == condicionRI){
+                        // ETAPA 6: Si el producto YA existía, rescatamos los extremos actuales y el precio nuevo
+                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        const precioNuevo = prod.precio_unitario_neto;
+
+                        // COMPARAMOS SEGUN LA CONDIFICÓN FISCAL:
+
+                        // Paso A: ¿El precio nuevo es el más BAJO de todos? Si es así, actualizamos el proveedor ganador
+                        if (precioNuevo < precioMasBajoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
+                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                            mejoresProductos[claveUnica].producto = { ...prod };
+                        }
+
+                        // Paso B: ¿El precio nuevo es el más ALTO de todos? Si es así, actualizamos nuestro faro del más caro
+                        if (precioNuevo > precioMasAltoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
+                        }
+
+                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
+                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
+                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        
+                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                    }
+                    // Responsanle Inscripto VS Monotributista.
+                    else{
+                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        const precioNuevo = prod.precio_final;
+
+                        if(precioNuevo < precioMasBajoActual){
+                            mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
+                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                            mejoresProductos[claveUnica].producto = { ...prod };
+                        }
+
+                        if (precioNuevo > precioMasAltoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
+                        }
+
+                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
+                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
+                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        
+                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                    }
+
                 }
+                // Y el 1er Producto tiene CONDICION MO.
+                if(mejoresProductos[claveUnica].condicion_fiscal_proveedor == condicionMO){
+                    // Prod Actual es RI.
+                    if(infoProveedor.condicion_fiscal == condicionRI){
+                        // ETAPA 6: Si el producto YA existía, rescatamos los extremos actuales y el precio nuevo
+                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_final_mas_bajo;
+                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_final_mas_alto;
+                        const precioNuevo = prod.precio_unitario_neto;
 
-                // Paso B: ¿El precio nuevo es el más ALTO de todos? Si es así, actualizamos nuestro faro del más caro
-                if (precioNuevo > precioMasAltoActual) {
-                    mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
+                        // COMPARAMOS SEGUN LA CONDIFICÓN FISCAL:
+
+                        // Paso A: ¿El precio nuevo es el más BAJO de todos? Si es así, actualizamos el proveedor ganador
+                        if (precioNuevo < precioMasBajoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
+                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                            mejoresProductos[claveUnica].producto = { ...prod };
+                        }
+
+                        // Paso B: ¿El precio nuevo es el más ALTO de todos? Si es así, actualizamos nuestro faro del más caro
+                        if (precioNuevo > precioMasAltoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
+                        }
+
+                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
+                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
+                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        
+                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                    }
+                    // Prod Actaul es MO
+                    else{
+                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        const precioNuevo = prod.precio_final;
+
+                        if(precioNuevo < precioMasBajoActual){
+                            mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
+                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                            mejoresProductos[claveUnica].producto = { ...prod };
+                        }
+
+                        if (precioNuevo > precioMasAltoActual) {
+                            mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
+                        }
+
+                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
+                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
+                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
+                        const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
+                        
+                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
+
+                    }
                 }
-
-                // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
-                // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
-                const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
-                
-                mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
             }
         });
     });
@@ -140,5 +242,5 @@ const obtenerMejoresPrecios = (listaProveedores) => {
 };
 
 
-export default obtenerMejoresPrecios;
+export default comparacionPreciosUsuarioRI;
 

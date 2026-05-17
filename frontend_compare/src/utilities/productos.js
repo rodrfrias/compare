@@ -3,7 +3,7 @@
 const productosRaw = [
 {
 proveedor: {
-    proveedor_nombre: "CONSTRUCTORA & COLOR",
+    proveedor_nombre: "SIMON S.A",
     CUIT: "30-ZZZZZZZZ-Z",
     dirección_email: "info@constcolor.com.ar",
     teléfono: "011-4555-XXXX",
@@ -21,11 +21,11 @@ proveedor: {
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
         presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 148760.33,
+        precio_unitario_neto: 1000.0,
         iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 180000.00,
-        ahorro: 0
+        precio_final: 1400.0,
+  
     },
     {
         id: 3,
@@ -39,17 +39,17 @@ proveedor: {
         iva_Included: true,
         alicuota_detectada: 21.0,
         precio_final: 15000.00,
-        ahorro: 500
+    
     }
     ]
 },
 {
 proveedor: {
-    proveedor_nombre: "PINTURERÍAS DEL CENTRO S.A.",
+    proveedor_nombre: "PEDRO S.A",
     CUIT: "30-XXXXXXXX-X",
     dirección_email: "ventas@pinturascentro.com.ar",
     teléfono: "0800-XXX-PINTA",
-    condicion_fiscal: "Responsable Inscripto",
+    condicion_fiscal: "Monotributista",
     dirección: "Av. Corrientes 1234",
     localidad: "CABA",
     codigo_postal: "1043"
@@ -63,42 +63,14 @@ proveedor: {
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
         presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 144628.10,
-        iva_Incluido: false,
+        precio_unitario_neto: 0,
+        iva_Incluido: true,
         alicuota_detectada: 21.0,
-        precio_final: 175000.00, // Precio alternativo de competencia
-        ahorro: 5000
+        precio_final: 1386.0,
+    
     }
     ]
 },
-{
-    proveedor: {
-      proveedor_nombre: "DISTRIBUIDORA REVESTIR S.R.L.",
-      CUIT: "30-YYYYYYYY-Y",
-      dirección_email: "mayorista@revestirsrl.com.ar",
-      teléfono: "011-4777-YYYY",
-      condicion_fiscal: "Responsable Inscripto",
-      dirección: "Av. Pres. Hipólito Yrigoyen 4500",
-      localidad: "Lanús",
-      codigo_postal: "1824"
-    },
-    producto: [
-      {
-        id: 24, // ID único para este nuevo proveedor
-        codigo: "LAT-EXT-PREM-20",
-        categoria: "PINTURAS",
-        nombre: "LATEX EXTERIOR PREMIUM",
-        marca: "SHERWIN WILLIAMS",
-        modelo: "LOXON",
-        presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 138842.98,
-        iva_Incluido: true,
-        alicuota_detectada: 21.0,
-        precio_final: 168000.00, // Mejor precio que la competencia ($12.000 menos que el original)
-        ahorro: 12000
-      }
-    ]
-}
 ];
 
 export default productosRaw;
