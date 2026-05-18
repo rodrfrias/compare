@@ -1,8 +1,20 @@
 
-const comparacionPreciosUsuarioRI = (listaProveedores) => {
+const comparacionPrecios = (listaProveedores, condicionFiscalUsuario) => {
     const condicionRI = "Responsable Inscripto";
-    const condicionMO = "Monotributista";
     const mejoresProductos = {};
+
+    // Estrategia de precio según quién compra
+    const getPrecioEfectivo = (prod, condicionFiscalProveedor) => {
+        if (condicionFiscalUsuario === condicionRI) {
+            // RI recupera IVA solo con proveedores RI
+            return condicionFiscalProveedor === condicionRI
+                ? prod.precio_unitario_neto
+                : prod.precio_final;
+        } else {
+            // MO siempre paga precio final, sin excepciones
+            return prod.precio_final;
+        }
+    };
 
     listaProveedores.forEach((item) => {
         const infoProveedor = item.proveedor;
@@ -12,18 +24,10 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
                 .trim()
                 .toUpperCase();
 
-            // ── El precio que realmente paga un usuario RI ──────────────────
-            // Si el proveedor es RI  → usa precio_unitario_neto (se descuenta IVA al comprar)
-            // Si el proveedor es MO → usa precio_final (no hay IVA crédito fiscal, paga el total)
-            const precioEfectivo =
-                infoProveedor.condicion_fiscal === condicionRI
-                    ? prod.precio_unitario_neto
-                    : prod.precio_final;
-
+            const precioEfectivo = getPrecioEfectivo(prod, infoProveedor.condicion_fiscal);
             const yaExiste = mejoresProductos[claveUnica] !== undefined;
 
             if (!yaExiste) {
-                // Primera vez: inicializamos con este único proveedor
                 mejoresProductos[claveUnica] = {
                     precio_efectivo_mas_bajo: precioEfectivo,
                     precio_efectivo_mas_alto: precioEfectivo,
@@ -35,19 +39,16 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
                 const masBajoActual = mejoresProductos[claveUnica].precio_efectivo_mas_bajo;
                 const masAltoActual = mejoresProductos[claveUnica].precio_efectivo_mas_alto;
 
-                // ¿Es el más barato hasta ahora? → actualiza ganador
                 if (precioEfectivo < masBajoActual) {
                     mejoresProductos[claveUnica].precio_efectivo_mas_bajo = precioEfectivo;
                     mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
                     mejoresProductos[claveUnica].producto = { ...prod };
                 }
 
-                // ¿Es el más caro hasta ahora? → actualiza el techo
                 if (precioEfectivo > masAltoActual) {
                     mejoresProductos[claveUnica].precio_efectivo_mas_alto = precioEfectivo;
                 }
 
-                // Recalculamos diferencia con los extremos reales
                 mejoresProductos[claveUnica].diferencia = Math.abs(
                     mejoresProductos[claveUnica].precio_efectivo_mas_alto -
                     mejoresProductos[claveUnica].precio_efectivo_mas_bajo
@@ -59,11 +60,11 @@ const comparacionPreciosUsuarioRI = (listaProveedores) => {
     return Object.values(mejoresProductos).map((item) => ({
         ...item.producto,
         diferencia: item.diferencia,
-        precio_efectivo_ganador: item.precio_efectivo_mas_bajo, // lo que paga el usuario RI
+        precio_efectivo_ganador: item.precio_efectivo_mas_bajo,
         iva: item.producto.alicuota_detectada ?? 21,
         proveedor_nombre: item.proveedor.proveedor_nombre,
         condicion_fiscal: item.proveedor.condicion_fiscal,
     }));
 };
 
-export default comparacionPreciosUsuarioRI;
+export default comparacionPrecios;

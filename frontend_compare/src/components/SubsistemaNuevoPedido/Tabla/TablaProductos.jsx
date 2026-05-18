@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import productosRaw from '../../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
-import comparacionPreciosUsuarioRI from '../../../utilities/ModuloComparacion/comp.js';
+import comparacionPrecios from "../../../utilities/ModuloComparacion/comp.js"
 
 
 
 //_____Buscamos los productos con mejores precios (Provisional)_________________
-const productosMejoresPrecios = comparacionPreciosUsuarioRI(productosRaw);
+const productosMejoresPrecios = comparacionPrecios(productosRaw,"Responsable Inscripto");
 
 // ─── Calcular subtotal ───────────────────────────────────────────────────────
 const calcularSubtotal = (precioFinal, cantidad) =>
