@@ -1,240 +1,69 @@
-/* THE_ORIGIN*/
-const productosRaw = [
-{
-proveedor: {
-    proveedor_nombre: "CONSTRUCTORA & COLOR",
-    CUIT: "30-ZZZZZZZZ-Z",
-    dirección_email: "info@constcolor.com.ar",
-    teléfono: "011-4555-XXXX",
-    condicion_fiscal: "Responsable Inscripto",
-    dirección: "Ruta 2 Km 40",
-    localidad: "Berazategui",
-    codigo_postal: "1884"
-    },
-    producto: [
-    {
-        id: 4,
-        codigo: "LAT-EXT-PREM-20",
-        categoria: "PINTURAS",
-        nombre: "LATEX EXTERIOR PREMIUM",
-        marca: "SHERWIN WILLIAMS",
-        modelo: "LOXON",
-        presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 148760.33,
-        iva_Incluido: true,
-        alicuota_detectada: 21.0,
-        precio_final: 180000.00,
-        ahorro: 0
-    },
-    {
-        id: 3,
-        codigo: "ACC-PIN-PRO-4",
-        categoria: "ACCESORIOS",
-        nombre: "PINCEL PROFESIONAL N°4",
-        marca: "EL GALGO",
-        modelo: "SERIE ORO",
-        presentacion: "UNIDAD",
-        precio_unitario_neto: 12396.69,
-        iva_Included: true,
-        alicuota_detectada: 21.0,
-        precio_final: 15000.00,
-        ahorro: 500
-    }
-    ]
-},
-{
-proveedor: {
-    proveedor_nombre: "PINTURERÍAS DEL CENTRO S.A.",
-    CUIT: "30-XXXXXXXX-X",
-    dirección_email: "ventas@pinturascentro.com.ar",
-    teléfono: "0800-XXX-PINTA",
-    condicion_fiscal: "Responsable Inscripto",
-    dirección: "Av. Corrientes 1234",
-    localidad: "CABA",
-    codigo_postal: "1043"
-    },
-    producto: [
-    {
-        id: 14, // ID único para distinguir esta variante de proveedor
-        codigo: "LAT-EXT-PREM-20",
-        categoria: "PINTURAS",
-        nombre: "LATEX EXTERIOR PREMIUM",
-        marca: "SHERWIN WILLIAMS",
-        modelo: "LOXON",
-        presentacion: "BALDE 20 LTS",
-        precio_unitario_neto: 144628.10,
-        iva_Incluido: false,
-        alicuota_detectada: 21.0,
-        precio_final: 175000.00, // Precio alternativo de competencia
-        ahorro: 5000
-    }
-    ]
-}
-];
-
 
 const comparacionPreciosUsuarioRI = (listaProveedores) => {
     const condicionRI = "Responsable Inscripto";
     const condicionMO = "Monotributista";
-    // ETAPA 1: Crear el diccionario vacío
     const mejoresProductos = {};
 
-    // ETAPA 2: Recorrer cada proveedor
     listaProveedores.forEach((item) => {
         const infoProveedor = item.proveedor;
 
-        // ETAPA 3: Recorrer cada producto de ese proveedor
         item.producto.forEach((prod) => {
-            
-            // ETAPA 4: Crear la clave única
-            const claveUnica = `${prod.nombre}|${prod.marca}|${prod.modelo}|${prod.presentacion}`.trim().toUpperCase();
+            const claveUnica = `${prod.nombre}|${prod.marca}|${prod.modelo}|${prod.presentacion}`
+                .trim()
+                .toUpperCase();
 
-            // ETAPA 5: Verificar si el producto ya existe en el diccionario
-            const yaExisteElProducto = mejoresProductos[claveUnica] !== undefined;
+            // ── El precio que realmente paga un usuario RI ──────────────────
+            // Si el proveedor es RI  → usa precio_unitario_neto (se descuenta IVA al comprar)
+            // Si el proveedor es MO → usa precio_final (no hay IVA crédito fiscal, paga el total)
+            const precioEfectivo =
+                infoProveedor.condicion_fiscal === condicionRI
+                    ? prod.precio_unitario_neto
+                    : prod.precio_final;
 
-            if (!yaExisteElProducto) {
-                // Si es la primera vez que lo vemos, este único precio es tanto el más bajo como el más alto por ahora.
+            const yaExiste = mejoresProductos[claveUnica] !== undefined;
+
+            if (!yaExiste) {
+                // Primera vez: inicializamos con este único proveedor
                 mejoresProductos[claveUnica] = {
-                    // Precios Netos para Responsables Inscriptos
-                    precio_neto_mas_bajo: prod.precio_unitario_neto,
-                    precio_neto_mas_alto: prod.precio_unitario_neto, 
-                    // Precios Finales para Monotrobutistas
-                    precio_final_mas_bajo: prod.precio_final,
-                    precio_final_mas_alto: prod.precio_final,
-                    // Condicion del Proveedor para compara precios
-                    condicion_fiscal_proveedor: infoProveedor.condicion_fiscal, // Tnemos a mano la condicion Fiscal
-                    // Un valor que tendrá las diferencia entre los precios (inicialmente 0 al haber un solo proveedor).
-                    diferencia: 0, 
-                    // DATOS ABSOLUTOS DEL PROVEEDOR Y PRODUCTO
+                    precio_efectivo_mas_bajo: precioEfectivo,
+                    precio_efectivo_mas_alto: precioEfectivo,
+                    diferencia: 0,
                     proveedor: { ...infoProveedor },
-                    producto: { ...prod }
+                    producto: { ...prod },
                 };
             } else {
+                const masBajoActual = mejoresProductos[claveUnica].precio_efectivo_mas_bajo;
+                const masAltoActual = mejoresProductos[claveUnica].precio_efectivo_mas_alto;
 
-                // 1er P: RI.
-
-                if(mejoresProductos[claveUnica].condicion_fiscal_proveedor == condicionRI){
-                    // RI VS RI.
-                    if(infoProveedor.condicion_fiscal == condicionRI){
-                        // ETAPA 6: Si el producto YA existía, rescatamos los extremos actuales y el precio nuevo
-                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
-                        const precioNuevo = prod.precio_unitario_neto;
-
-                        // COMPARAMOS SEGUN LA CONDIFICÓN FISCAL:
-
-                        // Paso A: ¿El precio nuevo es el más BAJO de todos? Si es así, actualizamos el proveedor ganador
-                        if (precioNuevo < precioMasBajoActual) {
-                            mejoresProductos[claveUnica].precio_neto_mas_bajo = precioNuevo;
-    
-                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
-                            mejoresProductos[claveUnica].producto = { ...prod };
-
-                        }
-
-                        // Paso B: ¿El precio nuevo es el más ALTO de todos? Si es así, actualizamos nuestro faro del más caro
-                        if (precioNuevo > precioMasAltoActual) {
-                            mejoresProductos[claveUnica].precio_neto_mas_alto = precioNuevo;
-                        }
-
-                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
-                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
-                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                        const extremoMaximo = mejoresProductos[claveUnica].precio_neto_mas_alto;
-                        
-                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
-
-                        // Actualizamos
-                        mejoresProductos[claveUnica].precio_final_mas_bajo = prod.precio_final;
-                        mejoresProductos[claveUnica].precio_final_mas_alto =  prod.precio_final;
-
-                    }
-                    // RI VS MO
-                    if(infoProveedor.condicion_fiscal == condicionMO){
-                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_neto_mas_alto;
-                        const precioNuevo = prod.precio_final;
-
-                        if (precioNuevo < precioMasBajoActual) {
-                            mejoresProductos[claveUnica].precio_final_mas_bajo = precioNuevo,
-
-                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
-                            mejoresProductos[claveUnica].producto = { ...prod };
-
-                        }
-
-                        if (precioNuevo > precioMasAltoActual) {
-                            mejoresProductos[claveUnica].precio_final_mas_alto = precioNuevo;
-                        }
-
-                        const extremoMinimo = mejoresProductos[claveUnica].precio_neto_mas_bajo;
-                        const extremoMaximo = mejoresProductos[claveUnica].precio_final_mas_bajo;
-
-                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
-
-                        // actualizamos
-                        mejoresProductos[claveUnica].precio_neto_mas_bajo = prod.precio_unitario_neto;
-                        mejoresProductos[claveUnica].precio_neto_mas_alto = prod.precio_unitario_neto;
-                        
-                    }
-
+                // ¿Es el más barato hasta ahora? → actualiza ganador
+                if (precioEfectivo < masBajoActual) {
+                    mejoresProductos[claveUnica].precio_efectivo_mas_bajo = precioEfectivo;
+                    mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
+                    mejoresProductos[claveUnica].producto = { ...prod };
                 }
-                // 1er P: MO.
-                if(mejoresProductos[claveUnica].condicion_fiscal_proveedor == condicionMO){
-                    // Prod Actual es RI.
-                    if(infoProveedor.condicion_fiscal == condicionRI){
-                    
 
-                    }
-                    // MO VS MO
-                    else{
-                        const precioMasBajoActual = mejoresProductos[claveUnica].precio_final_mas_bajo;
-                        const precioMasAltoActual = mejoresProductos[claveUnica].precio_final_mas_alto;
-                        const precioNuevo = prod.precio_final;
-
-                        if(precioNuevo < precioMasBajoActual){
-                            mejoresProductos[claveUnica].precio_final_mas_bajo = precioNuevo;
-                
-                            mejoresProductos[claveUnica].proveedor = { ...infoProveedor };
-                            mejoresProductos[claveUnica].producto = { ...prod };
-                        }
-
-                        if (precioNuevo > precioMasAltoActual) {
-                            mejoresProductos[claveUnica].precio_final_mas_alto = precioNuevo;
-                        }
-
-                        // Paso C: Si es un precio intermedio (ni el más bajo ni el más alto), el algoritmo no entra a ningún "if" de arriba.
-                        // Pero IGUAL recalculamos la diferencia usando los verdaderos extremos (el mínimo absoluto vs el máximo absoluto)
-                        const extremoMinimo = mejoresProductos[claveUnica].precio_final_mas_bajo;
-                        const extremoMaximo = mejoresProductos[claveUnica].precio_final_mas_alto;
-                        
-                        mejoresProductos[claveUnica].diferencia = Math.abs(extremoMaximo - extremoMinimo);
-
-                        // Actualizamos
-                        mejoresProductos[claveUnica].precio_neto_mas_bajo = prod.precio_unitario_neto;
-                        mejoresProductos[claveUnica].precio_neto_mas_alto = prod.precio_unitario_neto;
-
-                    }
+                // ¿Es el más caro hasta ahora? → actualiza el techo
+                if (precioEfectivo > masAltoActual) {
+                    mejoresProductos[claveUnica].precio_efectivo_mas_alto = precioEfectivo;
                 }
+
+                // Recalculamos diferencia con los extremos reales
+                mejoresProductos[claveUnica].diferencia = Math.abs(
+                    mejoresProductos[claveUnica].precio_efectivo_mas_alto -
+                    mejoresProductos[claveUnica].precio_efectivo_mas_bajo
+                );
             }
         });
     });
 
-    // ─── ETAPA 7: AQUÍ SE APLANAN TODOS LOS DATOS ───────────────────────────
-    return Object.values(mejoresProductos).map(item => {
-        return {
-            ...item.producto, // Metemos todas las propiedades del producto en la raíz (id, nombre, precio_final, etc.)
-            diferencia: item.diferencia, // El ahorro calculado se mete directo en el producto
-            iva: item.producto.alicuota_detectada ?? 21, // Dejamos el IVA listo aquí también
-            proveedor_nombre: item.proveedor.proveedor_nombre,
-            condicion_fiscal: item.proveedor.condicion_fiscal,
-        };
-    });
+    return Object.values(mejoresProductos).map((item) => ({
+        ...item.producto,
+        diferencia: item.diferencia,
+        precio_efectivo_ganador: item.precio_efectivo_mas_bajo, // lo que paga el usuario RI
+        iva: item.producto.alicuota_detectada ?? 21,
+        proveedor_nombre: item.proveedor.proveedor_nombre,
+        condicion_fiscal: item.proveedor.condicion_fiscal,
+    }));
 };
 
-
 export default comparacionPreciosUsuarioRI;
-
-
-
-// NOTA: RI VS RI: NO trabajo con los precios finales ; MO VS MO: No trabajo con los precios Netos
