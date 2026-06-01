@@ -27,7 +27,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
               Ahorro Total
             </p>
             <div className="flex items-baseline gap-2">
-              <p className="text-[35px] font-bold text-blue-900 leading-none tracking-tight">
+              <p className="text-[35px] font-bold text-green-600 leading-none tracking-tight">
                 $ 15.200,60
               </p>
               <span className="text-[12px] font-bold text-[#888] tracking-wider">ARS</span>
