@@ -9,6 +9,7 @@ const productosRaw = [
     producto: [
     {
         id: 14,
+        codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
@@ -27,6 +28,7 @@ const productosRaw = [
     producto: [
     {
         id: 4,
+        codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
@@ -45,6 +47,7 @@ const productosRaw = [
     producto: [
     {
         id: 21,
+        codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
         modelo: "LOXON",
