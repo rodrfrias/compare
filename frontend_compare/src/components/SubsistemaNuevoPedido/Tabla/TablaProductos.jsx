@@ -46,7 +46,7 @@ const InputNumerico = ({ value, onChange }) => (
       type="number"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-7 h-4 text-center border border-gray-300 text-[9px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none focus:border-blue-400"
+      className="w-7 h-4 text-center border border-gray-300 text-[10px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none focus:border-blue-400"
     />
     <div className="flex flex-row text-[7px] text-gray-400 gap-1 items-center">
       <button onClick={(e) => { e.stopPropagation(); onChange(Math.max(0, Number(value) - 1)); }} className="hover:text-black text-[10px]">▼</button>
@@ -199,12 +199,12 @@ const TablaProductos = () => {
                     <td className="px-2 py-1 uppercase border-r border-gray-100 text-[10px]" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold text-[10px]">{formatearPrecioARS(prod.precio_final)}</td>
-                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-green-600 font-bold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => setMostrarModalDif(true)}>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 '>no aplica</span>)}</td>
+                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 text-[10px]">{formatearPrecioARS(prod.precio_final)}</td>
+                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-blue-900 font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => setMostrarModalDif(true)}>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 text-[10px]'>no aplica</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right font-bold text-gray-900 text-[10px]">{ formatearPrecioARS(subtotal)}</td>
+                    <td className="px-2 py-1 text-right font-semibold text-gray-900 text-[10px]">{ formatearPrecioARS(subtotal)}</td>
                   </tr>
                 );
               }) : (

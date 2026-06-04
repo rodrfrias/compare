@@ -40,18 +40,18 @@ const TablaOrdenCompra = () => {
                     key={orden.id || index} 
                     className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'} border-b border-gray-100 hover:bg-blue-50 transition-colors`}
                   >
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">{orden.n_orden}</td>
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100">
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.n_orden}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">
                       {orden.fecha_emision}
                     </td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100">{orden.proveedor}</td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100">{orden.proveedor_email}</td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100">{orden.detalle_orden}</td>
-                    <td className="px-2 py-2 uppercase text-right text-gray-700 border-r border-gray-100">
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor}</td>
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor_email}</td>
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.detalle_orden}</td>
+                    <td className="px-2 py-2 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">
                       {/* Asumiendo que quieres formato moneda */}
                       {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                     </td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center font-bold">
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center font-bold text-[10px]">
 
                         {orden.estado}
         

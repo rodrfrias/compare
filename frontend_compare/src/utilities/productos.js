@@ -8,7 +8,7 @@ const productosRaw = [
     },
     producto: [
     {
-        id: 14,
+        id: 1,
         codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
@@ -27,7 +27,7 @@ const productosRaw = [
     },
     producto: [
     {
-        id: 4,
+        id: 2,
         codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
@@ -35,8 +35,19 @@ const productosRaw = [
         presentacion: "BALDE 20 LTS",
         precio_unitario_neto: 0,
         alicuota_detectada: 21.0,
-        precio_final: 1600.0, // ← precio efectivo para RI: $1.600
+        precio_final: 1600.0, // 
     },
+    {
+        id: 3,
+        codigo: "1-04246-10",
+        nombre: "LATEX INTERIOR MATE",
+        marca: "SHERWIN WILLIAMS",
+        modelo: "Z10",
+        presentacion: "BALDE 10 LTS",
+        precio_unitario_neto: 0,
+        alicuota_detectada: 21.0,
+        precio_final: 800.0
+    }
     ],
 },
 {
@@ -46,7 +57,7 @@ const productosRaw = [
     },
     producto: [
     {
-        id: 21,
+        id: 4,
         codigo: "1-04245-20",
         nombre: "LATEX EXTERIOR PREMIUM",
         marca: "SHERWIN WILLIAMS",
@@ -56,7 +67,39 @@ const productosRaw = [
         alicuota_detectada: 21.0,
         precio_final: 1650.0,
     },
+    {
+        id: 5,
+        codigo: "1-04246-10",
+        nombre: "LATEX INTERIOR MATE",
+        marca: "SHERWIN WILLIAMS",
+        modelo: "Z10",
+        presentacion: "BALDE 10 LTS",
+        precio_unitario_neto: 826.45,
+        alicuota_detectada: 21.0,
+        precio_final: 1000.0
+    },
     ],
 },
+
+{
+    proveedor: {
+    proveedor_nombre: "DISTRIBUIDORA COLOR S.R.L.",
+    condicion_fiscal: "Responsable Inscripto",
+    },
+    producto: [
+    {
+        id: 6,
+        codigo: "1-04247-20",
+        nombre: "ENDUIDO PLASTICO INTERIOR",
+        marca: "SHERWIN WILLIAMS",
+        modelo: "LOXON EXTRALATE",
+        presentacion: "BALDE 20 LTS",
+        precio_unitario_neto: 991.74, 
+        alicuota_detectada: 21.0,
+        precio_final: 1200.0
+    },
+    ],
+},
+
 ];
 export default productosRaw;
