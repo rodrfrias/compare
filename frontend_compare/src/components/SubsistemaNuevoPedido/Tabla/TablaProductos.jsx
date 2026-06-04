@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import productosRaw from '../../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
 import comparacionPrecios from "../../../utilities/ModuloComparacion/comp.js"
-
+import ModalDifProductos from './ModalDifProductos.jsx';
 
 
 //_____Buscamos los productos con mejores precios (Provisional)_________________
@@ -49,8 +49,8 @@ const InputNumerico = ({ value, onChange }) => (
       className="w-7 h-4 text-center border border-gray-300 text-[9px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none focus:border-blue-400"
     />
     <div className="flex flex-row text-[7px] text-gray-400 gap-1 items-center">
-      <button onClick={(e) => { e.stopPropagation(); onChange(Math.max(0, Number(value) - 1)); }} className="hover:text-black">▼</button>
-      <button onClick={(e) => { e.stopPropagation(); onChange(Number(value) + 1); }} className="hover:text-black">▲</button>
+      <button onClick={(e) => { e.stopPropagation(); onChange(Math.max(0, Number(value) - 1)); }} className="hover:text-black text-[10px]">▼</button>
+      <button onClick={(e) => { e.stopPropagation(); onChange(Number(value) + 1); }} className="hover:text-black text-[10px]">▲</button>
     </div>
   </div>
 );
@@ -64,6 +64,9 @@ const TablaProductos = () => {
   const [cantidades, setCantidades]         = useState(inicializarCantidades);
   // 1. Definimos el estado para controlar la visibilidad
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 2. Definimos el estado para controlar la visibilidad del Modal de diferencia de productos
+  const [mostrarModalDif, setMostrarModalDif] = useState(false);
 
   const productosFiltrados = useMemo(
     () => filtrarProductos(listaProductos, filtro),
@@ -108,6 +111,14 @@ const TablaProductos = () => {
   const handleCloseModal = () => {
       setIsModalOpen(false);
     }
+
+  const handleMostrarModalDif = () => {
+    setMostrarModalDif(true);
+  }
+
+  const handleCerrarModalDif = () => {
+    setMostrarModalDif(false);
+  }
 
   const headerStyles = `
   px-2 py-2 
@@ -186,9 +197,10 @@ const TablaProductos = () => {
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.condicion_fiscal}</td>
                     <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
                     <td className="px-2 py-1 uppercase border-r border-gray-100 text-[10px]" onClick={(e) => e.stopPropagation()}>
+                      <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
                     <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 font-semibold text-[10px]">{formatearPrecioARS(prod.precio_final)}</td>
-                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-green-600 font-bold'>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 '>no aplica</span>)}</td>
+                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-green-600 font-bold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => setMostrarModalDif(true)}>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 '>no aplica</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
@@ -232,7 +244,7 @@ const TablaProductos = () => {
           confirmar selección
       </button>
       <ModalPedido isOpen = {isModalOpen} onClose={handleCloseModal}></ModalPedido>
-
+      <ModalDifProductos isOpen = {mostrarModalDif} onClose={handleCerrarModalDif}></ModalDifProductos>
     </div>
   );
 };
