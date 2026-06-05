@@ -12,7 +12,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
       <div className="bg-[#ffffff] border-[0.5px] border-[#c0bfb8] w-full max-w-[950px] h-auto font-sans shadow-2xl">
         
         {/* Encabezado - Altura mínima */}
-        <div className="px-7 py-1.5 border-b-[0.5px] border-[#e2e1da] flex justify-between items-center bg-[#f5f4f0]">
+        <div className="px-2 py-1.5 border-b-[0.5px] border-[#e2e1da] flex justify-between items-center bg-[#f5f4f0]">
           <span className="text-[10px] font-semibold text-[#555] tracking-widest uppercase">
             Resumen de Pedido
           </span>
@@ -27,7 +27,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
               Ahorro Total
             </p>
             <div className="flex items-baseline gap-2">
-              <p className="text-[35px] font-bold text-blue-900 leading-none tracking-tight">
+              <p className="text-[35px] font-bold text-blue-950 leading-none tracking-tight">
                 $ 15.200,60
               </p>
               <span className="text-[12px] font-bold text-[#888] tracking-wider">ARS</span>
@@ -54,7 +54,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 Proveedores
               </p>
               <p className="text-[20px] font-bold  text-gray-800">
-                3 pedidos
+                3 Ordenes
               </p>
             </div>
           </div>

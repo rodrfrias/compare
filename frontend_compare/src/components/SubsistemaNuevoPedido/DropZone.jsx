@@ -32,19 +32,19 @@ const DropXone = () => {
         
         {/* ÁREA DE DROPZONE CORREGIDA */}
         <div 
-          className="w-full border border-gray-300 bg-[#f9f9f9] p-10 flex flex-col items-center justify-center gap-3 hover:border-blue-400 hover:bg-white transition-all cursor-pointer group"
+          className="w-full border border-gray-300 bg-[#f9f9f9] p-10 flex flex-col items-center justify-center gap-3 hover:border-blue-950 hover:bg-white transition-all cursor-pointer group"
           onDragOver={(e) => e.preventDefault()}
         >
           {/* Icono de subir sobrio */}
-          <div className="w-10 h-10 border-2 border-gray-300 flex items-center justify-center group-hover:border-blue-400 transition-colors">
-            <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-10 h-10 border-2 border-gray-300 flex items-center justify-center group-hover:border-blue-950 transition-colors">
+            <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="square" strokeWidth="2" d="M12 4v16m8-8H4" />
             </svg>
           </div>
           
           <div className="text-center">
             <p className="text-[11px] text-gray-600 uppercase tracking-tight">
-              Arrastrá y soltá archivos o <span className="text-blue-600 font-bold underline">examinar equipo</span>
+              Arrastrá y soltá archivos o <span className="text-blue-950 font-bold underline">examinar equipo</span>
             </p>
             <p className="text-[9px] text-gray-400 mt-1 uppercase tracking-tighter">
               Límite de carga: 50MB por archivo
@@ -78,7 +78,7 @@ const DropXone = () => {
                 {/* Progress Bar Plana */}
                 <div className="w-full h-1.5 bg-gray-100 border border-gray-200">
                   <div 
-                    className={`h-full transition-all duration-500 ${archivo.progreso === 100 ? 'bg-blue-600' : 'bg-blue-400'}`} 
+                    className={`h-full transition-all duration-500 ${archivo.progreso === 100 ? 'bg-blue-950' : 'bg-blue-950'}`} 
                     style={{ width: `${archivo.progreso}%` }}
                   ></div>
                 </div>
@@ -98,8 +98,8 @@ const DropXone = () => {
           ))}
           
           {archivos.length === 0 && (
-            <div className="py-8 text-center text-[10px] text-gray-400 uppercase italic">
-              No hay archivos seleccionados
+            <div className="py-8 text-center text-[12px] text-gray-400 italic">
+              No hay archivos seleccionados.
             </div>
           )}
         </div>

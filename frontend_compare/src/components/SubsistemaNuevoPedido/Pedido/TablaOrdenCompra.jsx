@@ -46,12 +46,12 @@ const TablaOrdenCompra = () => {
                     </td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor_email}</td>
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.detalle_orden}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px] font-semibold">{orden.detalle_orden}</td>
                     <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[11px]">
                       {/* Asumiendo que quieres formato moneda */}
                       {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                     </td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center font-bold text-[10px]">
+                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center text-[10px] font-semibold">
 
                         {orden.estado}
         
@@ -59,7 +59,7 @@ const TablaOrdenCompra = () => {
                     <td className="px-2 py-2 text-center">
                       <div className='flex items-center justify-center gap-2'>
                         <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <BsFillFileEarmarkPdfFill size={14}></BsFillFileEarmarkPdfFill>  </button>
-                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <GrMail size={14}></GrMail> </button>
+                        <button title="Envíar por Email" className='cursor-pointer text-gray-600 hover:scale-110'> <GrMail size={14}></GrMail> </button>
                       </div>
                     </td>
                   </tr>

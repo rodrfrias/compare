@@ -7,7 +7,7 @@ const MiNegocio = () => {
 
   // UI / UX Refactorizado para coincidir con la tabla de datos (image_2c3db8.png)
   const inputClass =
-    'w-full h-7 border border-gray-300 bg-white px-2 text-[11px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 transition-all shadow-sm';
+    'w-full h-7 border border-gray-300 bg-white px-2 text-[12px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 transition-all shadow-sm';
 
   const labelClass =
     'block text-[10px] font-bold uppercase tracking-tight text-gray-500 mb-1';
@@ -113,8 +113,6 @@ const MiNegocio = () => {
                       <option value="">Seleccioná tu condición</option>
                       <option>Responsable Inscripto</option>
                       <option>Monotributista</option>
-                      <option>Exento</option>
-                      <option>Consumidor Final</option>
                     </select>
                   </div>
                   <div>
