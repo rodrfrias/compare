@@ -229,7 +229,7 @@ const TablaProductos = () => {
                     <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 text-[11px]">{formatearPrecioARS(prod.precio_final)}</td>
                     <td className='px-2 py-1 text-center border-r border-gray-100'>
                       {prod.diferencia && prod.diferencia > 0 ?
-                      (<span title='Optimización de Costo Real: Este indicador representa el beneficio económico directo obtenido al seleccionar la alternativa más eficiente frente al precio máximo identificado en el mercado para este mismo producto.' className='uppercase text-[11px] text-blue-950 font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => {setMostrarModalDif(true) ; buscarProductosRechazadosPara(prod)}}>{formatearPrecioARS(prod.diferencia)}</span>)
+                      (<span title='Optimización de Costo Real: Este indicador representa el beneficio económico directo obtenido al seleccionar la alternativa más eficiente frente al precio máximo identificado en el mercado para este mismo producto.' className='uppercase text-[11px] text-blue-900 font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => {setMostrarModalDif(true) ; buscarProductosRechazadosPara(prod)}}>{formatearPrecioARS(prod.diferencia)}</span>)
                       :(<span className='uppercase text-gray-600 text-[11px]'>producto único</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
