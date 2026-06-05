@@ -1,12 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import productosRaw from '../../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
-import comparacionPrecios from "../../../utilities/ModuloComparacion/comp.js"
+import comparacionPreciosPro from "../../../utilities/ModuloComparacion/compPro.js"
 import ModalDifProductos from './ModalDifProductos.jsx';
+import { TbCircleCheck } from "react-icons/tb";
 
 
 //_____Buscamos los productos con mejores precios (Provisional)_________________
-const productosMejoresPrecios = comparacionPrecios(productosRaw,"Responsable Inscripto");
+
+const [prodGanadores, prodRechazados]= comparacionPreciosPro(productosRaw,"Monotributista");
 
 // ─── Calcular subtotal ───────────────────────────────────────────────────────
 const calcularSubtotal = (precioFinal, cantidad) =>
@@ -23,7 +25,7 @@ const formatearPrecioARS = (precio) => {
 // ─── Inicializar cantidades ──────────────────────────────────────────────────
 const inicializarCantidades = () => {
   const init = {};
-  productosMejoresPrecios.forEach(p => init[p.id] = 0);
+  prodGanadores.forEach(p => init[p.id] = 0);
   return init;
 };
 
@@ -58,15 +60,16 @@ const InputNumerico = ({ value, onChange }) => (
 
 // ────────────────────────────────────────────────────────────────────────────
 const TablaProductos = () => {
-  const [listaProductos, setListaProductos] = useState(ordenarPorCategoria(productosMejoresPrecios));
+  const [listaProductos, setListaProductos] = useState(ordenarPorCategoria(prodGanadores));
   const [filtro, setFiltro]                 = useState("");
   const [seleccionados, setSeleccionados]   = useState([]);
   const [cantidades, setCantidades]         = useState(inicializarCantidades);
   // 1. Definimos el estado para controlar la visibilidad
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   // 2. Definimos el estado para controlar la visibilidad del Modal de diferencia de productos
   const [mostrarModalDif, setMostrarModalDif] = useState(false);
+  // Para los productos Rechazados
+  const [rechazadosFiltrados, setRechazadosFiltrados] = useState([]);
 
   const productosFiltrados = useMemo(
     () => filtrarProductos(listaProductos, filtro),
@@ -118,6 +121,19 @@ const TablaProductos = () => {
 
   const handleCerrarModalDif = () => {
     setMostrarModalDif(false);
+    setRechazadosFiltrados([]); // Limpiamos el estado al cerrar
+  }
+
+  // Para mostrar buscar los pro rechazados /  Filtra basándose en el producto seleccionado de la fila 
+  const buscarProductosRechazadosPara = (productoActual) => {
+    const coincidentes = prodRechazados.filter(p => 
+      p.nombre?.toLowerCase() === productoActual.nombre?.toLowerCase() &&
+      p.marca?.toLowerCase() === productoActual.marca?.toLowerCase() &&
+      p.modelo?.toLowerCase() === productoActual.modelo?.toLowerCase() &&
+      p.presentacion?.toLowerCase() === productoActual.presentacion?.toLowerCase()
+    );
+    
+    setRechazadosFiltrados(coincidentes);
   }
 
   const headerStyles = `
@@ -158,17 +174,17 @@ const TablaProductos = () => {
                     className="w-3 h-3 accent-blue-600"
                   />
                 </th>
-                <th className={`${headerStyles} min-w-[120px]`}>codigo</th>
+                <th className={`${headerStyles} min-w-[120px]`}>código</th>
                 <th className={headerStyles}>nombre</th>
                 <th className={headerStyles}>marca</th>
                 <th className={headerStyles}>modelo</th>
-                <th className={headerStyles}>presentacion</th>
+                <th className={headerStyles}>presentación</th>
                 <th className={headerStyles}>proveedor</th>
-                <th className={headerStyles}>condicion proveedor</th>
+                <th className={headerStyles}>condición proveedor</th>
                 <th className={headerStyles}>precio unitario neto</th>
                 <th className={headerStyles}>iva</th>
                 <th className={headerStyles}>precio final</th>
-                <th className={headerStyles}>ahorro unitario</th>
+                <th className={headerStyles}>ahorro real (neto)</th>
                 <th className={headerStyles}>cantidad</th>
                 <th className={headerStyles}>subtotal</th>
               </tr>
@@ -193,14 +209,25 @@ const TablaProductos = () => {
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.marca}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.modelo}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.presentacion}</td>
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.proveedor_nombre}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">
+                      <div className="flex items-center gap-1.5 justify-between w-full">
+                        <span>{prod.proveedor_nombre}</span>
+                        {prod.diferencia > 0 ? (
+                        <TbCircleCheck 
+                          size={12}
+                          className="text-slate-500 text-[13px] cursor-help shrink-0" 
+                          title="Eficiencia de Compra: Opción validada mediante el análisis de impacto impositivo cruzado entre comprador y proveedor. Maximiza tu margen de ganancia."
+                        />): ""}
+                        
+                      </div>
+                    </td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{prod.condicion_fiscal}</td>
                     <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
                     <td className="px-2 py-1 uppercase border-r border-gray-100 text-[10px]" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
                     <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 text-[10px]">{formatearPrecioARS(prod.precio_final)}</td>
-                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-blue-900 font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => setMostrarModalDif(true)}>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 text-[10px]'>no aplica</span>)}</td>
+                    <td className='px-2 py-1 text-center border-r border-gray-100'>{prod.diferencia && prod.diferencia > 0 ?(<span className='uppercase text-[10px] text-blue-900 font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => {setMostrarModalDif(true) ; buscarProductosRechazadosPara(prod)}}>{formatearPrecioARS(prod.diferencia)}</span>):(<span className='uppercase text-gray-600 text-[10px]'>producto único</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
@@ -244,7 +271,7 @@ const TablaProductos = () => {
           confirmar selección
       </button>
       <ModalPedido isOpen = {isModalOpen} onClose={handleCloseModal}></ModalPedido>
-      <ModalDifProductos isOpen = {mostrarModalDif} onClose={handleCerrarModalDif}></ModalDifProductos>
+      <ModalDifProductos isOpen = {mostrarModalDif} onClose={handleCerrarModalDif } productos={rechazadosFiltrados}></ModalDifProductos>
     </div>
   );
 };
