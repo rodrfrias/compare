@@ -1,8 +1,8 @@
 import React from 'react';
 import ordenesCompra from '../../../utilities/ordenes';
 import { LuSendHorizontal } from "react-icons/lu";
-import { GrDocument } from "react-icons/gr";
-import { SiGmail } from "react-icons/si";
+import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
+import { GrMail } from "react-icons/gr";
 
 const TablaOrdenCompra = () => {
   const headerStyles = `
@@ -58,9 +58,8 @@ const TablaOrdenCompra = () => {
                     </td>
                     <td className="px-2 py-2 text-center">
                       <div className='flex items-center justify-center gap-2'>
-                        <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <GrDocument size={12}></GrDocument>  </button>
-                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <SiGmail size={12}></SiGmail> </button>
-                        <button title="Enviar Orden de Compra" className='cursor-pointer text-gray-600 hover:scale-110'><LuSendHorizontal size={12} /></button>
+                        <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <BsFillFileEarmarkPdfFill size={12}></BsFillFileEarmarkPdfFill>  </button>
+                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <GrMail size={12}></GrMail> </button>
                       </div>
                     </td>
                   </tr>

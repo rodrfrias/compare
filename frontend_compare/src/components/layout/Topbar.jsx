@@ -44,7 +44,7 @@ const Topbar = () => {
       <div className="flex items-center gap-3">
         <div className="flex flex-col min-w-0">
           <span className="text-[12px] font-semibold text-gray-900 leading-tight">Rodrigo Frias</span>
-          <span className="text-[10px] font-normal text-gray-500 leading-tight">ivfriasrodrigo18@gmail.com</span>
+          <span className="text-[12px] font-normal text-gray-500 leading-tight">ivfriasrodrigo18@gmail.com</span>
         </div>
          <div className="w-9 h-9 rounded-full bg-black/85 flex items-center justify-center border border-gray-300 shrink-0">
           <span className="text-white font-bold text-sm">R</span>

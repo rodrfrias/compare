@@ -74,7 +74,7 @@ const ModalDifProductos = ({ isOpen, onClose, productos = []}) => {
                                                 <LuInfo 
                                                     size={12}
                                                     className="text-slate-500 text-[13px] cursor-help shrink-0" 
-                                                    title="Eficiencia de Compra: Opción validada mediante el análisis de impacto impositivo cruzado entre comprador y proveedor. Maximiza tu margen de ganancia."
+                                                    title="Costo Real Excedente: Registro evaluado y descartado por la lógica impositiva cruzada. No representa la alternativa de desembolso óptimo para tu perfil fiscal actual."
                                                 />
                                             </div>
                                         </td>

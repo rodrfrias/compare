@@ -32,14 +32,14 @@ const ModalPedido = ({ isOpen, onClose }) => {
               </p>
               <span className="text-[12px] font-bold text-[#888] tracking-wider">ARS</span>
             </div>
-            <p className="text-[11px] text-gray-400 text-center mt-0.5">VS comprarle TODO al proveedor más caro.</p>
+            <p className="text-[12px] text-gray-400 text-center mt-0.5">Ahorro Total Potencial (Vs proveedor más caro de cada producto)</p>
           </div>
 
           {/* Métricas secundarias - Altura reducida en py-2 */}
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div className="border-[0.5px] border-[#e2e1da] px-4 py-2 bg-[#f9f8f4] text-center">
               <p className="text-[9px] font-bold text-[#999] uppercase tracking-[0.12em]">
-                Subtotal
+                COSTO TOTAL (Neto Real Estimado)
               </p>
               <div className="flex items-baseline justify-center gap-1.5">
                 <p className="text-[20px] font-bold text-gray-800">
@@ -47,7 +47,6 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 </p>
                 <span className="text-[9px] font-bold text-[#aaa]">ARS</span>
               </div>
-              <p className="text-[12px] text-gray-400 text-center mt-0.5">No incluye envío ni impuestos provinciales.</p>
             </div>
             
             <div className="border-[0.5px] border-[#e2e1da] px-4 py-2 bg-[#f9f8f4] flex flex-col justify-center text-center">
@@ -61,8 +60,8 @@ const ModalPedido = ({ isOpen, onClose }) => {
           </div>
 
           {/* Texto informativo - Menos margen y padding */}
-          <p className="text-[10px] text-[#b0afaa] text-center italic mb-4 border-b border-[#eee] pb-2">
-            Impuestos estimativos sujetos a facturación final.
+          <p className="text-[12px] text-[#b0afaa] text-center italic mb-4 border-b border-[#eee] pb-2">
+            Valores impositivos son estimativos. Sujetos a la facturación final del proveedor.
           </p>
 
           <div className='flex items-start min-h-50 border border-black/10'>
