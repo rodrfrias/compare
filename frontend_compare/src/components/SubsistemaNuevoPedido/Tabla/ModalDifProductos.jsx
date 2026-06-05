@@ -21,12 +21,12 @@ const ModalDifProductos = ({ isOpen, onClose, productos = []}) => {
     };
 
     const headerStyles = `
-        px-2.5 py-2 
-        text-[9px] font-bold uppercase tracking-wider text-[#555]
-        bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
-        border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
-        shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
-        text-center
+    px-2 py-2 
+    text-[10px] font-semibold uppercase tracking-wider text-[#555]
+    bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
+    border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
+    shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
+    text-center
     `;
 
     return (
@@ -63,31 +63,31 @@ const ModalDifProductos = ({ isOpen, onClose, productos = []}) => {
                                         className={`opacity-50 border-b border-gray-100 hover:bg-blue-50 ${seleccionado ? 'bg-blue-100' : filaBg} cursor-pointer transition-colors`}
                                     >
                                         {/* Celdas con py-2.5 y truncate para perfecta visibilidad */}
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">{prod.codigo}</td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-800 font-medium border-r border-gray-100 text-[10px] truncate">{prod.nombre}</td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">{prod.marca}</td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">{prod.modelo}</td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">{prod.presentacion}</td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">{prod.codigo}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-800 font-medium border-r border-gray-100 text-[10px] truncate">{prod.nombre}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">{prod.marca}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">{prod.modelo}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">{prod.presentacion}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">
                                             <div className="flex items-center gap-1.5 justify-between w-full">
                                                 <span>{prod.proveedor_nombre}</span>
                                                 <LuInfo 
-                                                    size={12}
+                                                    size={14}
                                                     className="text-slate-500 text-[13px] cursor-help shrink-0" 
                                                     title="Costo Real Excedente: Registro evaluado y descartado por la lógica impositiva cruzada. No representa la alternativa de desembolso óptimo para tu perfil fiscal actual."
                                                 />
                                             </div>
                                         </td>
-                                        <td className="px-2.5 py-2.5 text-left  uppercase text-gray-600 border-r border-gray-100 text-[10px] truncate">{prod.condicion_fiscal}</td>
-                                        <td className="px-2.5 py-2.5 text-right uppercase text-gray-700 border-r border-gray-100 text-[10px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
-                                        <td className="px-2.5 py-2.5 text-right uppercase text-gray-700 border-r border-gray-100 text-[10px]">{prod.alicuota_detectada}%</td>
-                                        <td className="px-2.5 py-2.5 text-right uppercase text-gray-700 border-r border-gray-100 font-semibold text-[10px]">{formatearPrecioARS(prod.precio_final)}</td>
+                                        <td className="px-2 py-1 text-left  uppercase text-gray-600 border-r border-gray-100 text-[11px] truncate">{prod.condicion_fiscal}</td>
+                                        <td className="px-2 py-1 text-right uppercase text-gray-700 border-r border-gray-100 text-[11px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
+                                        <td className="px-2 py-1 text-right uppercase text-gray-700 border-r border-gray-100 text-[11px]">{prod.alicuota_detectada}%</td>
+                                        <td className="px-2 py-1 text-right uppercase text-gray-700 border-r border-gray-100 font-semibold text-[11px]">{formatearPrecioARS(prod.precio_final)}</td>
                                     </tr>
                                 );
                             })
                         ) : (
                             <tr>
-                                <td colSpan="10" className="px-2 py-10 text-center text-gray-400 text-[10px] uppercase">
+                                <td colSpan="10" className="px-2 py-10 text-center text-gray-400 text-[11px] uppercase">
                                     No hay resultados
                                 </td>
                             </tr>

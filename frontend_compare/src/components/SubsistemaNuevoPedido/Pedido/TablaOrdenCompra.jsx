@@ -6,13 +6,13 @@ import { GrMail } from "react-icons/gr";
 
 const TablaOrdenCompra = () => {
   const headerStyles = `
-    px-2 py-2 
-    text-[9px] font-bold uppercase tracking-wider text-[#555]
-    bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
-    border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
-    shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
-    text-center
-  `;
+  px-2 py-2 
+  text-[10px] font-semibold uppercase tracking-wider text-[#555]
+  bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
+  border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
+  text-center
+`;
 
   const cellStyles = "px-2 py-1 uppercase text-gray-600 border-r border-gray-100";
 
@@ -40,14 +40,14 @@ const TablaOrdenCompra = () => {
                     key={orden.id || index} 
                     className={`${index % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'} border-b border-gray-100 hover:bg-blue-50 transition-colors`}
                   >
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.n_orden}</td>
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.n_orden}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">
                       {orden.fecha_emision}
                     </td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor}</td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor_email}</td>
-                    <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.detalle_orden}</td>
-                    <td className="px-2 py-2 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor_email}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.detalle_orden}</td>
+                    <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[11px]">
                       {/* Asumiendo que quieres formato moneda */}
                       {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                     </td>
@@ -58,8 +58,8 @@ const TablaOrdenCompra = () => {
                     </td>
                     <td className="px-2 py-2 text-center">
                       <div className='flex items-center justify-center gap-2'>
-                        <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <BsFillFileEarmarkPdfFill size={12}></BsFillFileEarmarkPdfFill>  </button>
-                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <GrMail size={12}></GrMail> </button>
+                        <button title="Ver Orden" className='cursor-pointer text-gray-600 hover:scale-110'> <BsFillFileEarmarkPdfFill size={14}></BsFillFileEarmarkPdfFill>  </button>
+                        <button title="Redactar un Mensaje" className='cursor-pointer text-gray-600 hover:scale-110'> <GrMail size={14}></GrMail> </button>
                       </div>
                     </td>
                   </tr>

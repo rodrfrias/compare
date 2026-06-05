@@ -85,7 +85,7 @@ const MiNegocio = () => {
                   </div>
 
                   {/* Nuevo módulo de firma */}
-                  <FirmaDigital></FirmaDigital>
+                  <FirmaDigital labelClass={labelClass} requiredDot={requiredDot}></FirmaDigital>
 
                 </div>
               </div>

@@ -10,7 +10,7 @@ const Loading = () => {
       {/* Contenedor de Información: Ancho ajustado al padre */}
       <div className="w-full max-w-3xl space-y-6">
         <div className="text-center space-y-2">
-          <p className=" font-sans text-[10px] text-black/50 truncate max-w-xs mx-auto">
+          <p className=" font-sans text-[12px] text-black/50 truncate max-w-xs mx-auto">
             Analizando Documentos, espere por favor...
           </p>
         </div>

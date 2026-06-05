@@ -6,6 +6,8 @@ const SignatureCanvas = ({ tab, labelClass, requiredDot }) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
 
+  
+
   // --- MEJORA: Ref para almacenar los puntos actuales ---
   const currentPathRef = useRef([]);
 

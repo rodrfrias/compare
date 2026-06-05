@@ -17,7 +17,7 @@ const Topbar = () => {
     <div className='w-full fixed top-0 left-0 z-10 h-12 bg-[#f9f9f7] border-b border-gray-300 antialiased flex items-center justify-between px-4'>
 
       {/* Logo */}
-      <span className="font-serif text-[20px] tracking-tight text-[#1d1d19]">
+      <span className="font-serif text-[22px] tracking-tight text-[#1d1d19]">
         Compare
       </span>
 
