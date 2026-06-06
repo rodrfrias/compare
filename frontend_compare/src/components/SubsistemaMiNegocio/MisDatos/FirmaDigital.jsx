@@ -106,8 +106,8 @@ const SignatureCanvas = ({ tab, labelClass, requiredDot }) => {
 
   return (
     <div className="mt-2">
-      <label className={labelClass}>Firma {requiredDot}</label>
-      <div className="border border-gray-200 rounded-[3px] bg-white w-full h-[175px] relative overflow-hidden">
+      <label className={labelClass}>Firma Digital{requiredDot}</label>
+      <div className="border border-gray-200 rounded-[3px] bg-white w-full h-[175px] relative overflow-hidden shadow-sm">
         <canvas
           onMouseDown={startDrawing}
           onMouseMove={draw}

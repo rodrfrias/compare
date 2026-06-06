@@ -10,17 +10,17 @@ const MiNegocio = () => {
     'w-full h-7 border border-gray-300 bg-white px-2 text-[12px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400 transition-all shadow-sm';
 
   const labelClass =
-    'block text-[10px] font-bold uppercase tracking-tight text-gray-500 mb-1';
+    'text-[10px] font-semibold uppercase tracking-wider text-[#555] mb-1';
     
   const subLabelClass = 
-    'text-[9px] text-gray-400 mt-0.5 italic leading-tight';
+    'text-[10px] text-gray-400 mt-0.5 italic leading-tight';
 
   // Botón estilo "Generar Pedido" de la tabla
   const mainButtonClass = 
     'h-8 px-10  text-[10px] font-bold uppercase tracking-[0.12em] text-[#444] bg-gradient-to-b from-[#ffffff] to-[#f2f2f2] hover:from-[#f9f9f9] hover:to-[#e8e8e8] border-[0.5px] border-[#c0bfb8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_2px_rgba(0,0,0,0.05)] transition-all duration-200  active:scale-[0.98] active:from-[#ececec] active:to-[#dadada] outline-none cursor-pointer';
 
 
-  const requiredDot = <span className="text-blue-500 ml-0.5">*</span>
+  const requiredDot = <span className="text-blue-500 ml-0.5 text-xs">*</span>
 
   return (
     <div className="flex-1 flex flex-col h-full border border-gray-300 bg-[#f9f9f7] overflow-hidden font-sans">
@@ -46,8 +46,8 @@ const MiNegocio = () => {
           }`}
         >
           VISTA PREVIA
-          <span className="text-[8px] bg-gray-200 text-gray-500 px-2 py-0.5 border border-gray-300 tracking-normal normal-case font-normal">
-            orden de compra
+          <span className="text-[10px] bg-gray-200 text-gray-500 px-2 py-0.5 border border-gray-300 tracking-normal normal-case font-normal">
+            Orden de Compra
           </span>
         </button>
       </div>
@@ -148,8 +148,8 @@ const MiNegocio = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-6 border-t border-gray-300 mt-6 flex-shrink-0">
-            <p className="text-[10px] text-gray-400">
+          <div className="flex items-center justify-between pt-2 border-t border-gray-300 mt-6 flex-shrink-0">
+            <p className="text-[12px] text-gray-400">
               <span className="text-blue-500 font-bold">*</span> Campos obligatorios
             </p>
             <button className={mainButtonClass}>

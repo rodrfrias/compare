@@ -8,7 +8,7 @@ import { TbCircleCheck } from "react-icons/tb";
 
 //_____Buscamos los productos con mejores precios (Provisional)_________________
 
-const [prodGanadores, prodRechazados]= comparacionPreciosPro(productosRaw,"Monotributista");
+const [prodGanadores, prodRechazados]= comparacionPreciosPro(productosRaw,"Responsable Inscripto");
 
 // ─── Calcular subtotal ───────────────────────────────────────────────────────
 const calcularSubtotal = (precioFinal, cantidad) =>
@@ -184,7 +184,7 @@ const TablaProductos = () => {
                 <th className={headerStyles}>precio unitario neto</th>
                 <th className={headerStyles}>iva</th>
                 <th className={headerStyles}>precio final</th>
-                <th className={headerStyles}>ahorro real (neto)</th>
+                <th className={headerStyles}>diferencia unitaria</th>
                 <th className={headerStyles}>cantidad</th>
                 <th className={headerStyles}>subtotal</th>
               </tr>
