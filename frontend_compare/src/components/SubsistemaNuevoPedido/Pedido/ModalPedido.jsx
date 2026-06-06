@@ -88,9 +88,14 @@ const ModalPedido = ({ isOpen, onClose }) => {
               * Valores impositivos y cálculos de ahorro presentados son estimativos y se encuentran sujetos a las variaciones de la facturación final emitida por cada proveedor.[cite: 1]
             </p>
           </div>
+          <div className='flex items-center justify-end mt-2 gap-2'>
+            <div>
+              <button className= {mainButtonClass}> preparar y enviar</button>
+            </div>
+            <div>
+              <button onClick={onClose} className= {mainButtonClass}> cancelar</button>
+            </div>
 
-          <div className='flex items-center justify-end mt-2'>
-              <button onClick={onClose} className= {mainButtonClass}> Cerrar</button>
           </div>
         </div>
       </div>

@@ -48,11 +48,11 @@ const vistaPDF = () => {
           </div>
         </div>
 
-        {/* Tabla de metadatos */}
+        {/* Tabla de metadatos - Ajustada a 4 columnas */}
         <table className="w-full border-collapse mb-6">
           <thead>
             <tr className="bg-gray-100">
-              {['FECHA DE O/C', 'SOLICITANTE', 'CONDICIÓN DE PAGO', 'PLAZO DE ENTREGA', 'OBSERVACIONES'].map((h, i) => (
+              {['FECHA DE O/C', 'SOLICITANTE', 'CONDICIÓN DE PAGO', 'PLAZO DE ENTREGA'].map((h, i) => (
                 <th key={i} className="border border-gray-800 px-2 py-1 text-[9px] font-bold text-left uppercase">
                   {h}
                 </th>
@@ -65,7 +65,6 @@ const vistaPDF = () => {
               <td className="border border-gray-800 px-2 h-7"></td>
               <td className="border border-gray-800 px-2 h-7 text-gray-400 italic">30 días / contado</td>
               <td className="border border-gray-800 px-2 h-7 text-gray-400 italic">X días hábiles</td>
-              <td className="border border-gray-800 px-2 h-7 w-[25%]"></td>
             </tr>
           </tbody>
         </table>
@@ -93,7 +92,8 @@ const vistaPDF = () => {
                 <td className="border border-gray-800 px-2 h-7 text-right text-gray-400">$</td>
               </tr>
             ))}
-            {/* Totales */}
+            
+            {/* Totales con espacio izquierdo libre */}
             {[
               { label: 'SUBTOTAL NETO', value: '$ -' },
               { label: 'IVA 21%', value: '$ -' },
@@ -102,7 +102,15 @@ const vistaPDF = () => {
               { label: 'TOTAL', value: '$ -', bold: true },
             ].map(({ label, value, bold, muted }, i) => (
               <tr key={i}>
-                <td colSpan={4} className="border-none px-2"></td>
+                {/* Renderiza el título solo en el primer elemento y le permite abarcar la altura de las 5 filas */}
+                {i === 0 ? (
+                  <td colSpan={4} rowSpan={5} className="border-none pt-2 px-2 align-top text-left">
+                    <p className="font-bold text-[9px] uppercase tracking-wider text-gray-900">
+                      Observaciones:
+                    </p>
+                  </td>
+                ) : null}
+                
                 <td className={`px-2 py-1 text-right text-[10px] border border-gray-800 bg-white ${bold ? 'font-bold' : ''} ${muted ? 'text-gray-400 text-[9px]' : ''}`}>
                   {label}
                 </td>

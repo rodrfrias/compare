@@ -23,7 +23,7 @@ const MiNegocio = () => {
   const requiredDot = <span className="text-blue-500 ml-0.5 text-xs">*</span>
 
   return (
-    <div className="flex-1 flex flex-col h-full border border-gray-300 bg-[#f9f9f7] overflow-hidden font-sans">
+    <div className="flex-1 flex flex-col h-full bg-[#f9f9f7] overflow-hidden font-sans">
 
       {/* ── Tabs (Navegación Superior) ── */}
       <div className="flex items-center border-b border-gray-300 bg-[#f9f9f7] px-8 pt-4">
