@@ -117,19 +117,21 @@ const ModalPedido = ({ isOpen, onClose }) => {
           RETOQUE: Se redujo 'py-3' a 'py-2' para que el botón "cancelar" esté perfectamente al ras inferior.
         */}
         <div className='px-4 py-2 bg-[#f5f4f0] border-t-[0.5px] border-[#e2e1da] flex items-center justify-between gap-2 shrink-0'>
-          <button className={`${mainButtonClass} flex items-center justify-center gap-2`}>
-            <LuFileSearch2 className="w-3.5 h-3.5 text-[#555] shrink-0" />
-            <span>ver documento de orden</span>
-          </button>
+        
           <div className='flex items-center gap-2'>
             <button className={`${mainButtonClass} flex items-center justify-center gap-2`}>
-              <LuSend className="w-3.5 h-3.5 shrink-0" />
-              <span>enviar orden</span>
+              <LuFileSearch2 className="w-3.5 h-3.5 text-[#555] shrink-0" />
+              <span>ver documento de orden</span>
             </button>
             <button onClick={onClose} className={mainButtonClass}>
             cancelar
             </button>
           </div>
+          <button className={`${mainButtonClass} w-92 flex items-center justify-center gap-2`}>
+              <LuSend className="w-3.5 h-3.5 shrink-0" />
+              <span>enviar orden</span>
+          </button>
+      
         </div>
       </div>
     </div>
