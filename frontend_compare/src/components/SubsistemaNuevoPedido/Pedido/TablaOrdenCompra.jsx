@@ -12,7 +12,7 @@ const TablaOrdenCompra = () => {
 
   const headerStyles = `
     px-2 py-2 
-    text-[10px] font-semibold uppercase tracking-wider text-[#555]
+    text-[9px] font-semibold uppercase tracking-wider text-[#555]
     bg-gradient-to-b from-[#f9f9f9] to-[#e8e8e7] 
     border-r-[0.5px] border-b-[0.5px] border-[#c0bfb8]
     shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]
@@ -62,14 +62,14 @@ const TablaOrdenCompra = () => {
                           className="w-3 h-3 accent-blue-600 cursor-pointer" 
                         />
                       </td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.n_orden}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.n_orden}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">
                         {orden.fecha_emision}
                       </td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor_email}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px] font-semibold">{orden.detalle_orden}</td>
-                      <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[11px]">
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor_email}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px] font-semibold">{orden.detalle_orden}</td>
+                      <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">
                         {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                       </td>
                       <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center text-[10px] font-semibold">

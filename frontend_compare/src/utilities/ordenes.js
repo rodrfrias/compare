@@ -8,7 +8,7 @@ const ordenesCompra = [
     proveedor_email: "pint12@gmail.com",
     detalle_orden: "3 Items",
     subtotal: 625000.00,
-    estado: "Generado"
+    estado: "pendiente de revisión"
   },
   {
     n_orden: "OC-2024-002",
@@ -17,7 +17,7 @@ const ordenesCompra = [
     proveedor_email: "constructoracolor@gmail.com",
     detalle_orden: "1 Items",
     subtotal: 161157.02,
-    estado: "Generado"
+    estado: "pendiente de revisión"
   },
   {
     n_orden: "OC-2024-003",
@@ -26,7 +26,7 @@ const ordenesCompra = [
     proveedor_email: "disresscm@gmail.com",
     detalle_orden: "1 Items",
     subtotal: 95000.50,
-    estado: "Generado"
+    estado: "pendiente de revisión"
   }
 ];
 
