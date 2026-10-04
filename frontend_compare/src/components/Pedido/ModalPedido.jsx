@@ -45,9 +45,8 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 </p>
                 <div className="flex items-baseline gap-2 mt-1.5">
                   <p className="text-[48px] font-extrabold text-[#0B3C61] leading-none tracking-tight tabular-nums">
-                    $ 15.200,60
+                    15.200,60
                   </p>
-                  <span className="text-[13px] font-semibold text-[#6b8aa6] tracking-wider">ARS</span>
                 </div>
               </div>
 
@@ -62,7 +61,7 @@ const ModalPedido = ({ isOpen, onClose }) => {
               <div className={`${cardClass} px-4 py-3.5 text-center`}>
                 <p className={`${labelClass} mb-1`}>Unidades Totales:</p>
                 <p className="text-[28px] font-extrabold text-[#1f2933] leading-none tabular-nums">
-                  24 Unidades
+                  24 
                 </p>
               </div>
 
@@ -70,9 +69,8 @@ const ModalPedido = ({ isOpen, onClose }) => {
                 <p className={`${labelClass} mb-1`}>Costo de Órdenes Actuales:</p>
                 <div className="flex items-baseline justify-center gap-1.5">
                   <p className="text-[28px] font-extrabold text-[#1f2933] leading-none tabular-nums">
-                    $ 881.157,52
+                    881.157,52
                   </p>
-                  <span className="text-[10px] font-semibold text-[#9a998f]">ARS</span>
                 </div>
               </div>
             </div>

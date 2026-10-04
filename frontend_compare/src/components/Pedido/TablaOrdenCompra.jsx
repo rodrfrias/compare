@@ -54,7 +54,7 @@ const TablaOrdenCompra = () => {
                       }`}
                     >
                       {/* Indicador visual de tipo Radio */}
-                      <td className="px-1 py-1 text-center border-r border-gray-100">
+                      <td className="px-2 py-1 text-center border-r border-gray-100">
                         <input 
                           type="radio" 
                           checked={esSeleccionado} 
@@ -62,15 +62,15 @@ const TablaOrdenCompra = () => {
                           className="w-3 h-3 accent-blue-600 cursor-pointer" 
                         />
                       </td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.n_orden}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[12px]">{orden.n_orden}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">
                         {orden.fecha_emision}
                       </td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px]">{orden.proveedor_email}</td>
-                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[10px] font-semibold">{orden.detalle_orden}</td>
-                      <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">
-                        {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{orden.proveedor_email}</td>
+                      <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px] font-semibold">{orden.detalle_orden}</td>
+                      <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[12px]">
+                        {new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(orden.subtotal)}
                       </td>
             
                     </tr>
