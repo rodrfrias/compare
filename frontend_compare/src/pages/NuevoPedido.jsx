@@ -1,5 +1,5 @@
 import React from 'react'
-import TablaProductos from '../components/Tabla/TablaProductos.jsx'
+import TablaProductos from '../components/Productos/TablaProductos.jsx'
 import Loading from "../components/Loading.jsx"
 import DropZone from "../components/DropZone.jsx"
 
