@@ -28,7 +28,7 @@ const Topbar = () => {
             key={link.id}
             to={link.path}
             onClick={() => setActiveLink(link.id)}
-            className={`flex items-center gap-2 h-full px-5 text-[10px] font-light border-b-2 transition-colors duration-150
+            className={`flex items-center gap-2 h-full px-5 text-[11px] font-light border-b-2 transition-colors duration-150
               ${activeLink === link.id
                 ? 'border-gray-900 text-gray-900'
                 : 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-400'

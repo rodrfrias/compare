@@ -34,7 +34,7 @@ const TablaOrdenCompra = () => {
                 <th className={headerStyles}>email proveedor</th>
                 <th className={headerStyles}>detalle de orden</th>
                 <th className={headerStyles}>subtotal</th>
-                <th className={headerStyles}>estado</th>
+              
               </tr>
             </thead>
             <tbody>
@@ -72,9 +72,7 @@ const TablaOrdenCompra = () => {
                       <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[10px]">
                         {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(orden.subtotal)}
                       </td>
-                      <td className="px-2 py-2 uppercase text-gray-600 border-r border-gray-100 text-center text-[10px] font-semibold">
-                        {orden.estado}
-                      </td>
+            
                     </tr>
                   );
                 })

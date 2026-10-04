@@ -16,9 +16,8 @@ const calcularSubtotal = (precioFinal, cantidad) =>
 
 const formatearPrecioARS = (precio) => {
   return new Intl.NumberFormat('es-AR', {
-    style: 'currency',
-    currency: 'ARS',
-    minimumFractionDigits: 2
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(precio);
 };
 
@@ -48,7 +47,7 @@ const InputNumerico = ({ value, onChange }) => (
       type="number"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-7 h-4 text-center border border-gray-300 text-[11px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none focus:border-blue-400"
+      className="w-7 h-4 text-center border border-gray-300 text-[12px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none focus:border-blue-400"
     />
     <div className="flex flex-row text-[7px] text-gray-400 gap-1 items-center">
       <button onClick={(e) => { e.stopPropagation(); onChange(Math.max(0, Number(value) - 1)); }} className="hover:text-black text-[10px]">▼</button>
@@ -105,7 +104,7 @@ const TablaProductos = () => {
 
   // ___MODAL_____________________________________________________________________
 
-  // 2. Funciona para abrir el Modal
+  // 2. Funcion para abrir el Modal
   const handleOpenModal = () => {
       setIsModalOpen(true);
     }
@@ -153,10 +152,10 @@ const TablaProductos = () => {
       <div className="mb-1">
         <input
           type="text"
-          placeholder="Buscar por Nombre, Código ó Marca..."
+          placeholder="Buscar por Nombre, Código o Marca..."
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
-          className="w-full h-6 px-3 bg-white border border-gray-300 font-sans text-[12px] focus:outline-none focus:border-blue-400 shadow-sm"
+          className="w-full h-6 px-3 bg-white border border-gray-300 font-sans text-[13px] focus:outline-none focus:border-blue-400 shadow-sm"
         />
       </div>
 
@@ -204,8 +203,8 @@ const TablaProductos = () => {
                     <td className="px-1 py-1 text-center">
                       <input type="checkbox" checked={seleccionado} readOnly className="w-3 h-3 accent-blue-600" />
                     </td>
-                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{prod.codigo}</td>
-                    <td className="px-2 py-1 uppercase text-gray-800 font-medium border-r border-gray-100 whitespace-nowrap text-[10px]">{prod.nombre}</td>
+                    <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[12px]">{prod.codigo}</td>
+                    <td className="px-2 py-1 uppercase text-gray-800 font-medium border-r border-gray-100 whitespace-nowrap text-[11px]">{prod.nombre}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{prod.marca}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{prod.modelo}</td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{prod.presentacion}</td>
@@ -222,19 +221,19 @@ const TablaProductos = () => {
                       </div>
                     </td>
                     <td className="px-2 py-1 uppercase text-gray-600 border-r border-gray-100 text-[11px]">{prod.condicion_fiscal}</td>
-                    <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[11px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
+                    <td className="px-2 py-1 uppercase text-right text-gray-700 border-r border-gray-100 text-[12px]">{formatearPrecioARS(prod.precio_unitario_neto)}</td>
                     <td className="px-2 py-1 uppercase border-r border-gray-100 text-[11px]" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={prod.iva} onChange={(val) => cambiarIva(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 text-[11px]">{formatearPrecioARS(prod.precio_final)}</td>
+                    <td className="px-2 py-1 text-right text-gray-700 border-r border-gray-100 text-[12px]">{formatearPrecioARS(prod.precio_final)}</td>
                     <td className='px-2 py-1 text-center border-r border-gray-100'>
                       {prod.diferencia && prod.diferencia > 0 ?
-                      (<span title='Optimización de Costo Real: Este indicador representa el beneficio económico directo obtenido al seleccionar la alternativa más eficiente frente al precio máximo identificado en el mercado para este mismo producto.' className='uppercase text-[11px] text-[#0B3C61] font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => {setMostrarModalDif(true) ; buscarProductosRechazadosPara(prod)}}>{formatearPrecioARS(prod.diferencia)}</span>)
+                      (<span title='Optimización de Costo Real: Este indicador representa el beneficio económico directo obtenido al seleccionar la alternativa más eficiente frente al precio máximo identificado en el mercado para este mismo producto.' className='uppercase text-[12px] text-[#0B3C61] font-extrabold inline-block transition-transform duration-100 hover:scale-110 cursor-pointer' onClick={() => {setMostrarModalDif(true) ; buscarProductosRechazadosPara(prod)}}>{formatearPrecioARS(prod.diferencia)}</span>)
                       :(<span className='uppercase text-gray-600 text-[11px]'>producto único</span>)}</td>
                     <td className="px-2 py-1 border-r border-gray-100" onClick={(e) => e.stopPropagation()}>
                       <InputNumerico value={cantidades[prod.id]} onChange={(val) => cambiarCantidad(prod.id, val)} />
                     </td>
-                    <td className="px-2 py-1 text-right font-semibold text-gray-900 text-[11px]">{ formatearPrecioARS(subtotal)}</td>
+                    <td className="px-2 py-1 text-right  text-gray-900 text-[12px]">{ formatearPrecioARS(subtotal)}</td>
                   </tr>
                 );
               }) : (
