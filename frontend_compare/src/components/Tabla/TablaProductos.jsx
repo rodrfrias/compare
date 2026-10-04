@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import productosRaw from '../../../utilities/productos.js';
+import productosRaw from '../../utilities/productos.js';
 import ModalPedido from '../Pedido/ModalPedido.jsx';
-import comparacionPreciosPro from "../../../utilities/ModuloComparacion/compPro.js"
-import ModalDifProductos from './ModalDifProductos.jsx';
+import comparacionPreciosPro from "../../utilities/ModuloComparacion/compPro.js"
+import ModalDifProductos from "./ModalDifProductos.jsx"
 import { TbCircleCheck } from "react-icons/tb";
 
 

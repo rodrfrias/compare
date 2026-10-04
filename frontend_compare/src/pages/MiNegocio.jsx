@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import FirmaDigital from "../components/SubsistemaMiNegocio/MisDatos/FirmaDigital.jsx"
-import VistaPDF from '../components/SubsistemaMiNegocio/MisDatos/VistaPDF.jsx';
+import FirmaDigital from "../components/MiNegocio/FirmaDigital.jsx"
+import VistaPDF from '../components/MiNegocio/VistaPDF.jsx';
 
 const MiNegocio = () => {
   const [tab, setTab] = useState('datos')

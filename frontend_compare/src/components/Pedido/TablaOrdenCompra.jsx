@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ordenesCompra from '../../../utilities/ordenes';
+import ordenesCompra from '../../utilities/ordenes';
 
 const TablaOrdenCompra = () => {
   // Estado para almacenar únicamente el ID de la fila seleccionada (o null si ninguna)
